@@ -1,0 +1,2 @@
+cat 1-2000_6.txt | analyze -f /usr/local/Cellar/freeling/3.1_8/share/freeling/config/ca.cfg
+

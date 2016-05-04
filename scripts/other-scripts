@@ -1,0 +1,2 @@
+cat en-twitter.txt | analyze -f /usr/local/Cellar/freeling/3.1_8/share/freeling/config/en.cfg
+
