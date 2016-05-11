@@ -7,25 +7,17 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Projects/FreeLing-4.0-beta2/APIs/java/freeling.jar!/" />
+          <root url="jar://$USER_HOME$/Projects/freeling_src/APIs/java/freeling.jar!/" />
         </CLASSES>
         <JAVADOC />
+        <NATIVE>
+          <root url="file://$USER_HOME$/Projects/freeling_src/APIs/java" />
+        </NATIVE>
         <SOURCES>
-          <root url="jar://$USER_HOME$/Projects/FreeLing-4.0-beta2/APIs/java/freeling.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="file://$USER_HOME$/Projects/FreeLing-4.0-beta2/APIs/java/edu/upc/freeling" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$USER_HOME$/Projects/FreeLing-4.0-beta2/APIs/java" />
+          <root url="jar://$USER_HOME$/Projects/freeling_src/APIs/java/freeling.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
