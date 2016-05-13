@@ -7,7 +7,7 @@ public class Main {
     // Modify this line to be your FreeLing installation directory
     private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
-    private static final String LANG = "en";
+    private static final String LANG = "ca";
 
     public static void main(String[] args) {
         System.load("/Users/aimeebarciauskas/Projects/freeling_src/APIs/java/libfreeling_javaAPI.dylib");
@@ -30,7 +30,7 @@ public class Main {
 
         try {
             String filename;
-            filename = "/Users/aimeebarciauskas/IdeaProjects/gaceta/data/1-2000_8.txt";
+            filename = "/Users/aimeebarciauskas/GACETA/SPLIT_NORM/29-2002_18.txt";
             //filename = "/Users/aimeebarciauskas/Desktop/test.txt";
             Corpus corpus;
             corpus = new Corpus(filename);
@@ -39,22 +39,26 @@ public class Main {
             for (int i = 0; i < corpus.documents.size(); i++) {
                 for (int j = 0; j < corpus.documents.size(); j++) {
                     if (i < j) {
-                        ArrayList<String> doc1 = corpus.documents.get(i);
-                        ArrayList<String> doc2 = corpus.documents.get(j);
-                        int nwscore = alignment.needlemanWunsch(doc1, doc2);
-                        if (nwscore > 0) {
-                            System.out.println("Some sort of score: " + nwscore);
-                            System.out.println("Doc1: " + doc1);
-                            System.out.println("Doc2: " + doc1 + "\n\n");
+                        ArrayList doc1 = corpus.documents.get(i);
+
+                        ArrayList doc2 = corpus.documents.get(j);
+                        HashMap nw = alignment.needlemanWunsch(doc1, doc2, false);
+                        int nwscore = (int) nw.get("score");
+                        int[][] nwmatrix = (int[][]) nw.get("matrix");
+                        if (nwscore > -999) {
+                            Alignment.printAlignment(nwmatrix, doc1, doc2);
+                            System.out.println("Score: " + nwscore);
+                            //System.out.println("Doc1: " + doc1);
+                            //System.out.println("Doc2: " + doc2);
                         }
                     }
                 }
             }
 
 
-            //corpus.createTermDictionary();
-            //corpus.createDocumentTermMatrix();
-            //corpus.createTfIdfMatrix();
+//            corpus.createTermDictionary();
+//            corpus.createDocumentTermMatrix();
+//            corpus.createTfIdfMatrix();
 
             //Close the input stream
             //System.out.println(Arrays.<></>oString(termDictionary.entrySet().toArray()));
@@ -66,6 +70,7 @@ public class Main {
 
             // SANITY CHECK METHODS
 //            ArrayList terms = new ArrayList(corpus.termDictionary.keySet());
+//            System.out.println("terms: " + terms);
 //            Double[][] tfIdfMatrix = corpus.tfIdfMatrix;
 //            System.out.println("Tf-idf scores:");
 //            for (int j = 1; j < terms.size(); j++) {
