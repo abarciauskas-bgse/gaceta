@@ -48,39 +48,10 @@ public class Main {
                         if (nwscore > -999) {
                             Alignment.printAlignment(nwmatrix, doc1, doc2);
                             System.out.println("Score: " + nwscore);
-                            //System.out.println("Doc1: " + doc1);
-                            //System.out.println("Doc2: " + doc2);
                         }
                     }
                 }
             }
-
-
-//            corpus.createTermDictionary();
-//            corpus.createDocumentTermMatrix();
-//            corpus.createTfIdfMatrix();
-
-            //Close the input stream
-            //System.out.println(Arrays.<></>oString(termDictionary.entrySet().toArray()));
-            //System.out.println("Min value in term dictionary: " + Collections.min(termDictionary.values()));
-            //System.out.println("Max value in term dictionary: " + Collections.max(termDictionary.values()));
-            //System.out.println("Length of term dictionary: " + termDictionary.size());
-            //System.out.println("Number of collected documents:" + documents.size());
-            //System.out.println(Arrays.toString(termDictionary.entrySet().toArray()));
-
-            // SANITY CHECK METHODS
-//            ArrayList terms = new ArrayList(corpus.termDictionary.keySet());
-//            System.out.println("terms: " + terms);
-//            Double[][] tfIdfMatrix = corpus.tfIdfMatrix;
-//            System.out.println("Tf-idf scores:");
-//            for (int j = 1; j < terms.size(); j++) {
-//                Object term = terms.get(j);
-//                int termindx = (int) corpus.termDictionary.get(term);
-//                Double tfidf = tfIdfMatrix[0][termindx];
-//                if (tfidf > 0) {
-//                    System.out.println(term + ": " + tfidf  + ", ");
-//                }
-//            }
 
         } catch (Exception e) {
             e.printStackTrace();
