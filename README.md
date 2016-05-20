@@ -1,5 +1,6 @@
-## Redundancy in Barcelona's Municipal Gazette
+# Redundancy in Barcelona's Municipal Gazette
 
+----
 ## Alignment algorithms
 
 ### Needleman-Wunsch Algorithm
@@ -21,7 +22,18 @@ NW has been implemented along with a `printAligment` function which returns an a
 * [Smith-Waterman Algorithm (Wikipedia)](https://en.wikipedia.org/wiki/Smith–Waterman_algorithm)
 * [What is the difference between local and global sequence alignments?](http://biology.stackexchange.com/questions/11263/what-is-the-difference-between-local-and-global-sequence-alignments)
 
-### Summary Statistics for Corpora
+#### Complexity
+
+Complexity of one comparision is `O(m x n)`. There are `N` of these comparisons where `N` is the number of documents at a given level. Say `H(b)` is the overhead of processing a document of size `b`, than the time to compare `N` documents can be estimated: `E(total_time) = H(avg(b))*N + N*avg(O(m x n))`.
+
+avg(O( m x n )) and H(avg(b_d)) are quantities to be estimated.
+
+At the level of `SPLIT_NORM` these values are:
+
+`H(b)`: 
+
+----
+## Summary Statistics of Corpora
 
 * 560 PDF2TXT files, average file size 425927 bytes (426 KB)
 * 13116 SPLIT_NORM files, average file size 13177 bytes (13 KB) (these numbers are near equal to values for SPLIT)

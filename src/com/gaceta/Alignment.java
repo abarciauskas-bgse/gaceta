@@ -91,8 +91,8 @@ public class Alignment {
             } else {
                 scores.put("up", -999);
             }
-
-            String maxKey = null;
+            // FIXME: Hack should not be anything
+            String maxKey = "left";
             int maxScore = -999;
 
             Iterator it = scores.entrySet().iterator();
