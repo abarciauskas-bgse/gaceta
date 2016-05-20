@@ -24,13 +24,15 @@ NW has been implemented along with a `printAligment` function which returns an a
 
 #### Complexity
 
-Complexity of one comparision is `O(m x n)`. There are `N` of these comparisons where `N` is the number of documents at a given level. Say `H(b)` is the overhead of processing a document of size `b`, than the time to compare `N` documents can be estimated: `E(total_time) = H(avg(b))*N + N*avg(O(m x n))`.
+Complexity of one comparision is `O(m x n)`. There are `N` of these comparisons where `N` is the number of documents at a given level. 
 
-avg(O( m x n )) and H(avg(b_d)) are quantities to be estimated.
+For SPLIT_NORM, omitting the greatest 1% of document length we have (Note: these numbers are for a subset of 970 out of a total 13,116 documents):
 
-At the level of `SPLIT_NORM` these values are:
+* Average length of document in SPLIT_NORM: 25
+* Max length of document in SPLIT_NORM: 141
+* Median length of document in SPLIT_NORM: 21
 
-`H(b)`: 
+
 
 ----
 ## Summary Statistics of Corpora
@@ -44,4 +46,11 @@ Unix script for average file size in directory:
 ls -l PDF2TXT | awk '{sum += $5; n++;} END {print sum/n;}'
 ```
 
+### Time to pre-process
+
+* To read in 970 SPLIT_NORM documents into the `documents` database took 6 hours (162 documents / hour) so reading all 13116 files will take 80 hours
+
+```psql
+select count(distinct(FileName)) from documents;
+```
 

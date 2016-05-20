@@ -5,6 +5,7 @@ import java.util.*;
 import edu.upc.freeling.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class Main {
     // Modify this line to be your FreeLing installation directory
@@ -27,27 +28,8 @@ public class Main {
         return c;
     }
 
-    public static void main(String[] args) {
-        System.load("/Users/aimeebarciauskas/Projects/freeling_src/APIs/java/libfreeling_javaAPI.dylib");
-//
-        Util.initLocale( "default" );
-
-        // Create options set for maco analyzer.
-        // Default values are Ok, except for data files.
-        MacoOptions op = new MacoOptions( LANG );
-
-        op.setDataFiles( "",
-                DATA + "common/punct.dat",
-                DATA + LANG + "/dicc.src",
-                DATA + LANG + "/afixos.dat",
-                "",
-                DATA + LANG + "/locucions.dat",
-                DATA + LANG + "/np.dat",
-                DATA + LANG + "/quantities.dat",
-                DATA + LANG + "/probabilitats.dat");
-
+    public static void processDocuments(boolean writeTimes) {
         try {
-            Connection dbConnection = dbConnect();
             String filetype = "SPLIT_NORM";
             final java.io.File folder = new java.io.File("/Users/aimeebarciauskas/GACETA/" + filetype);
             java.io.PrintWriter writer_processing = new java.io.PrintWriter(filetype.toLowerCase() + "_create_corpus_times.csv", "UTF-8");
@@ -93,6 +75,68 @@ public class Main {
 
             writer_processing.close();
             writer_alignments.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        System.load("/Users/aimeebarciauskas/Projects/freeling_src/APIs/java/libfreeling_javaAPI.dylib");
+//
+        Util.initLocale( "default" );
+
+        // Create options set for maco analyzer.
+        // Default values are Ok, except for data files.
+        MacoOptions op = new MacoOptions( LANG );
+
+        op.setDataFiles( "",
+                DATA + "common/punct.dat",
+                DATA + LANG + "/dicc.src",
+                DATA + LANG + "/afixos.dat",
+                "",
+                DATA + LANG + "/locucions.dat",
+                DATA + LANG + "/np.dat",
+                DATA + LANG + "/quantities.dat",
+                DATA + LANG + "/probabilitats.dat");
+
+        try {
+            Connection dbConnection = dbConnect();
+            Statement stmt = null;
+            String filetype = "SPLIT_NORM";
+            final java.io.File folder = new java.io.File("/Users/aimeebarciauskas/GACETA/" + filetype);
+            int limit = 0;
+
+            for (final File fileEntry : folder.listFiles()) {
+                limit++;
+                if (limit > folder.listFiles().length) {
+                    break;
+                } else {
+                    System.out.println("Reading file: " + fileEntry.getName());
+                    Corpus corpus;
+                    corpus = new Corpus(fileEntry.getAbsolutePath());
+                    for (int i = 0; i < corpus.documents.size(); i++) {
+                        // store every document
+                        ArrayList<String> doc = corpus.documents.get(i);
+                        if (doc.size() > 0) {
+                            stmt = dbConnection.createStatement();
+
+                            // FIXME: Is too hacky but apparently how all the kids are doing it.
+                            String docWordsString = "";
+                            for (String s : doc) {
+                                docWordsString += "\"" + s.replace("'", "''") + "\",";
+                            }
+                            docWordsString = docWordsString.substring(0, docWordsString.length() - 1);
+                            docWordsString = "{" + docWordsString + "}";
+
+                            String sql = "INSERT INTO documents (FileType, FileName, Length, Lemmas) values ('"
+                                    + filetype + "','" + fileEntry.getName() + "','"  + doc.size() + "','" + docWordsString + "');";
+                            stmt.executeUpdate(sql);
+                        }
+                    }
+                    System.out.println("Done inserting file: " + fileEntry.getName());
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
