@@ -32,7 +32,9 @@ For SPLIT_NORM, omitting the greatest 1% of document length we have (Note: these
 * Max length of document in SPLIT_NORM: 141
 * Median length of document in SPLIT_NORM: 21
 
+**Once there is an estimate for the time it takes to process two documents of average length, we can estimate running time on a given subset of N documents as `N*(N+1)/2*avg_running_time`**
 
+The first document is compared with N-1 documents, the second document is compared with N-2 documents, etc.
 
 ----
 ## Summary Statistics of Corpora
