@@ -84,15 +84,28 @@ public class Main {
         try {
             Connection dbConnection = dbConnect();
             Statement stmt = null;
+            Statement checkstmt = null;
             String filetype = "SPLIT_NORM";
             final java.io.File folder = new java.io.File("/Users/aimeebarciauskas/GACETA/" + filetype);
             int limit = 0;
 
             for (final File fileEntry : folder.listFiles()) {
                 limit++;
+                checkstmt = dbConnection.createStatement();
+                String sql = "SELECT count(*) FROM documents WHERE FileName = '" + fileEntry.getName() + "';";
+                ResultSet res = checkstmt.executeQuery(sql);
+                res.next();
                 if (limit > folder.listFiles().length) {
                     break;
+                } else if (res.getInt("count") > 0) {
+                    System.out.println("Skipping " + fileEntry.getName());
+                    continue;
                 } else {
+                    checkstmt = dbConnection.createStatement();
+                    sql = "SELECT count(*) FROM documents";
+                    res = checkstmt.executeQuery(sql);
+                    res.next();
+                    System.out.println("Total documents: " + res.getInt("count"));
                     System.out.println("Reading file: " + fileEntry.getName());
                     Corpus corpus;
                     corpus = new Corpus(fileEntry.getAbsolutePath());
@@ -110,7 +123,7 @@ public class Main {
                             docWordsString = docWordsString.substring(0, docWordsString.length() - 1);
                             docWordsString = "{" + docWordsString + "}";
 
-                            String sql = "INSERT INTO documents (FileType, FileName, Length, Lemmas) values ('"
+                            sql = "INSERT INTO documents (FileType, FileName, Length, Lemmas) values ('"
                                     + filetype + "','" + fileEntry.getName() + "','"  + doc.size() + "','" + docWordsString + "');";
                             stmt.executeUpdate(sql);
                         }
@@ -143,25 +156,26 @@ public class Main {
                 DATA + LANG + "/probabilitats.dat");
 
         try {
-            Alignment alignment = new Alignment();
-            Connection dbConnection = dbConnect();
-            Statement stmt = null;
-            stmt = dbConnection.createStatement();
-            // get 2 documents of average length (25 words) or max length (141)
-            int doc_len = 141;
-            String sql = "select Lemmas from documents where Length = " + doc_len;
-            ResultSet rs = stmt.executeQuery(sql);
-
-            final float startTime = System.currentTimeMillis();
-            rs.next();
-            String[] doc1 = (String[]) rs.getArray("Lemmas").getArray();
-            rs.next();
-            String[] doc2 = (String[]) rs.getArray("Lemmas").getArray();
-            alignment.needlemanWunsch(doc1, doc2, false);
-            final float endTime = System.currentTimeMillis();
-            System.out.println(startTime);
-            System.out.println(endTime);
-            System.out.println("time spent processing two documents of length " + doc_len + ": " + (endTime - startTime));
+            writeDocuments();
+//            Alignment alignment = new Alignment();
+//            Connection dbConnection = dbConnect();
+//            Statement stmt = null;
+//            stmt = dbConnection.createStatement();
+//            // get 2 documents of average length (25 words) or 99% max length (141)
+//            int doc_len = 25;
+//            String sql = "select Lemmas from documents where Length = " + doc_len;
+//            ResultSet rs = stmt.executeQuery(sql);
+//
+//            final Long startTime = System.currentTimeMillis();
+//            rs.next();
+//            String[] doc1 = (String[]) rs.getArray("Lemmas").getArray();
+//            rs.next();
+//            String[] doc2 = (String[]) rs.getArray("Lemmas").getArray();
+//            alignment.needlemanWunsch(doc1, doc2, false);
+//            final Long endTime = System.currentTimeMillis();
+//            System.out.println(startTime);
+//            System.out.println(endTime);
+//            System.out.println(endTime - startTime);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
