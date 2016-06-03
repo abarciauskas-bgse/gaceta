@@ -175,10 +175,10 @@ public class Main {
                 DATA + LANG + "/probabilitats.dat");
 
         try {
-            //writeDocuments();
+            writeDocuments();
             // started at 12pm
             // 42 minutes for ~< 700 documents (685)
-            calcAndWriteAlignments();
+            //calcAndWriteAlignments();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
