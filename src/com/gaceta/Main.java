@@ -11,6 +11,9 @@ public class Main {
     private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
     private static final String LANG = "ca";
+    private static final String FILETYPE = "SPLIT_NORM";
+    private static final java.io.File FOLDER = new java.io.File("/Users/aimeebarciauskas/GACETA/" + FILETYPE);
+    private static final int minDocLength = 4;
 
     public static Connection dbConnect() {
         Connection c = null;
@@ -30,8 +33,72 @@ public class Main {
     // finds all documents by filename
     // calculates alignments and stores them in db
     public static void calcAndWriteAlignments() {
-        
+        Alignment alignment = new Alignment();
+        Connection dbConnection = dbConnect();
+        Statement stmt = null;
+        ArrayList<String> filenames = new ArrayList<>();
+        String fileQueryString = "SELECT distinct(FileName) from documents;";
+        try {
+            stmt = dbConnection.createStatement();
+            ResultSet rs = stmt.executeQuery(fileQueryString);
+            // Fetch each row from the result set
+            while (rs.next()) {
+                String name = rs.getString("FileName");
+                filenames.add(name);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error: " + e.getMessage());
+        }
+        System.out.println("Total number of distinct documents: " + filenames.size());
 
+
+        for (int fidx = 0; fidx < filenames.size(); fidx ++) {
+            String filename = filenames.get(fidx);
+            System.out.println("Calculating alignments for " + filename + ", file idx: " + fidx);
+            String docsQueryString = "SELECT Id, Lemmas from documents where FileName = '" + filename + "';";
+            try {
+                ResultSet rs = stmt.executeQuery(docsQueryString);
+                ArrayList<HashMap> documentsArr = new ArrayList<>();
+                while(rs.next()) {
+                    int Id = rs.getInt("Id");
+                    String[] docLemmas = (String[]) rs.getArray("Lemmas").getArray();
+                    HashMap docMap = new HashMap();
+                    docMap.put("Id", Id);
+                    docMap.put("Lemmas", docLemmas);
+                    documentsArr.add(docMap);
+                }
+
+                for (int doc1idx = 0; doc1idx < documentsArr.size(); doc1idx++) {
+                    HashMap doc1 = documentsArr.get(doc1idx);
+                    int doc1id = (int) doc1.get("Id");
+                    String[] doc1lemmas = (String[]) doc1.get("Lemmas");
+
+                    if (doc1lemmas.length >= minDocLength) {
+                        for (int doc2idx = 0; doc2idx < documentsArr.size(); doc2idx++) {
+                            // so we don't double count
+                            if (doc2idx > doc1idx) {
+                                HashMap doc2 = documentsArr.get(doc2idx);
+                                int doc2id = (int) doc2.get("Id");
+                                String[] doc2lemmas = (String[]) doc2.get("Lemmas");
+
+                                if (doc2lemmas.length >= minDocLength) {
+                                    int score = (int) alignment.needlemanWunsch(doc1lemmas, doc2lemmas, false).get("score");
+                                    String updateSqlString = "INSERT INTO alignments (FileName, Doc1Id, Doc2Id, Score) values ('"
+                                            + filename + "','" + doc1id + "','" + doc2id + "','" + score + "');";
+                                    stmt.executeUpdate(updateSqlString);
+                                }
+                            }
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Error: " + e.getMessage());
+            }
+
+        }
     }
 
     public static void writeDocuments() {
@@ -39,17 +106,15 @@ public class Main {
             Connection dbConnection = dbConnect();
             Statement stmt = null;
             Statement checkstmt = null;
-            String filetype = "SPLIT_NORM";
-            final java.io.File folder = new java.io.File("/Users/aimeebarciauskas/GACETA/" + filetype);
             int limit = 0;
 
-            for (final File fileEntry : folder.listFiles()) {
+            for (final File fileEntry : FOLDER.listFiles()) {
                 limit++;
                 checkstmt = dbConnection.createStatement();
                 String sql = "SELECT count(*) FROM documents WHERE FileName = '" + fileEntry.getName() + "';";
                 ResultSet res = checkstmt.executeQuery(sql);
                 res.next();
-                if (limit > folder.listFiles().length) {
+                if (limit > FOLDER.listFiles().length) {
                     break;
                 } else if (res.getInt("count") > 0) {
                     System.out.println("Skipping " + fileEntry.getName());
@@ -76,9 +141,9 @@ public class Main {
                             }
                             docWordsString = docWordsString.substring(0, docWordsString.length() - 1);
                             docWordsString = "{" + docWordsString + "}";
-
+                            // FIXME: Should use minDocLength here
                             sql = "INSERT INTO documents (FileType, FileName, Length, Lemmas) values ('"
-                                    + filetype + "','" + fileEntry.getName() + "','"  + doc.size() + "','" + docWordsString + "');";
+                                    + FILETYPE + "','" + fileEntry.getName() + "','"  + doc.size() + "','" + docWordsString + "');";
                             stmt.executeUpdate(sql);
                         }
                     }
@@ -110,26 +175,10 @@ public class Main {
                 DATA + LANG + "/probabilitats.dat");
 
         try {
-            writeDocuments();
-//            Alignment alignment = new Alignment();
-//            Connection dbConnection = dbConnect();
-//            Statement stmt = null;
-//            stmt = dbConnection.createStatement();
-//            // get 2 documents of average length (25 words) or 99% max length (141)
-//            int doc_len = 25;
-//            String sql = "select Lemmas from documents where Length = " + doc_len;
-//            ResultSet rs = stmt.executeQuery(sql);
-//
-//            final Long startTime = System.currentTimeMillis();
-//            rs.next();
-//            String[] doc1 = (String[]) rs.getArray("Lemmas").getArray();
-//            rs.next();
-//            String[] doc2 = (String[]) rs.getArray("Lemmas").getArray();
-//            alignment.needlemanWunsch(doc1, doc2, false);
-//            final Long endTime = System.currentTimeMillis();
-//            System.out.println(startTime);
-//            System.out.println(endTime);
-//            System.out.println(endTime - startTime);
+            //writeDocuments();
+            // started at 12pm
+            // 42 minutes for ~< 700 documents (685)
+            calcAndWriteAlignments();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());

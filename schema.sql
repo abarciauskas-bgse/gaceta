@@ -7,12 +7,14 @@ CREATE TABLE documents (
     Lemmas      varchar[]
 );
 
+CREATE UNIQUE INDEX documents_id ON documents (Id);
 
 CREATE TABLE alignments (
     Id serial PRIMARY KEY,
     FileName varchar(50),
-    doc1 int REFERENCES documents (Id),
-    doc2 int REFERENCES documents (Id),
-    score int
+    Doc1Id int REFERENCES documents (Id),
+    Doc2Id int REFERENCES documents (Id),
+    Score int
 );
-/* INSERT INTO "documents" (FileType, Length, Lemmas) values (filetype, doc.size, doc); */
+
+CREATE UNIQUE INDEX alignments_docs_idx ON alignments (Doc1Id, Doc2Id);
