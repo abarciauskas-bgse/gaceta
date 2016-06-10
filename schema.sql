@@ -17,4 +17,4 @@ CREATE TABLE alignments (
     Score int
 );
 
-CREATE UNIQUE INDEX alignments_docs_idx ON alignments (Doc1Id, Doc2Id);
+CREATE UNIQUE INDEX alignments_docIds_idx ON alignments (Doc1Id, Doc2Id);
