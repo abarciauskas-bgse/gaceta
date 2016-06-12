@@ -190,8 +190,8 @@ public class Main {
         HmmTagger tg = new HmmTagger( DATA + LANG + "/tagger.dat", true, 2 );
 
         try {
-            writeDocuments();
-            //calcAndWriteAlignments();
+            //writeDocuments();
+            calcAndWriteAlignments();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
