@@ -37,7 +37,7 @@ public class Main {
         Connection dbConnection = dbConnect();
         Statement stmt = null;
         ArrayList<String> filenames = new ArrayList<>();
-        String fileQueryString = "SELECT distinct(FileName) from documents;";
+        String fileQueryString = "SELECT distinct(FileName) from processed_documents;";
         try {
             stmt = dbConnection.createStatement();
             ResultSet rs = stmt.executeQuery(fileQueryString);
@@ -56,39 +56,35 @@ public class Main {
         for (int fidx = 0; fidx < filenames.size(); fidx ++) {
             String filename = filenames.get(fidx);
             System.out.println("Calculating alignments for " + filename + ", file idx: " + fidx);
-            String docsQueryString = "SELECT Id, Lemmas from documents where FileName = '" + filename + "';";
+            String docsQueryString = "SELECT Id, TaggedLemmas from processed_documents where FileName = '" + filename + "';";
             try {
                 ResultSet rs = stmt.executeQuery(docsQueryString);
                 ArrayList<HashMap> documentsArr = new ArrayList<>();
                 while(rs.next()) {
                     int Id = rs.getInt("Id");
-                    String[] docLemmas = (String[]) rs.getArray("Lemmas").getArray();
+                    String[] docLemmas = (String[]) rs.getArray("TaggedLemmas").getArray();
                     HashMap docMap = new HashMap();
                     docMap.put("Id", Id);
-                    docMap.put("Lemmas", docLemmas);
+                    docMap.put("TaggedLemmas", docLemmas);
                     documentsArr.add(docMap);
                 }
 
                 for (int doc1idx = 0; doc1idx < documentsArr.size(); doc1idx++) {
                     HashMap doc1 = documentsArr.get(doc1idx);
                     int doc1id = (int) doc1.get("Id");
-                    String[] doc1lemmas = (String[]) doc1.get("Lemmas");
+                    String[] doc1lemmas = (String[]) doc1.get("TaggedLemmas");
 
-                    if (doc1lemmas.length >= minDocLength) {
-                        for (int doc2idx = 0; doc2idx < documentsArr.size(); doc2idx++) {
-                            // so we don't double count
-                            if (doc2idx > doc1idx) {
-                                HashMap doc2 = documentsArr.get(doc2idx);
-                                int doc2id = (int) doc2.get("Id");
-                                String[] doc2lemmas = (String[]) doc2.get("Lemmas");
+                    for (int doc2idx = 0; doc2idx < documentsArr.size(); doc2idx++) {
+                        // so we don't double count
+                        if (doc2idx > doc1idx) {
+                            HashMap doc2 = documentsArr.get(doc2idx);
+                            int doc2id = (int) doc2.get("Id");
+                            String[] doc2lemmas = (String[]) doc2.get("TaggedLemmas");
 
-                                if (doc2lemmas.length >= minDocLength) {
-                                    int score = (int) alignment.needlemanWunsch(doc1lemmas, doc2lemmas, false).get("score");
-                                    String updateSqlString = "INSERT INTO alignments (FileName, Doc1Id, Doc2Id, Score) values ('"
-                                            + filename + "','" + doc1id + "','" + doc2id + "','" + score + "');";
-                                    stmt.executeUpdate(updateSqlString);
-                                }
-                            }
+                            int score = (int) alignment.needlemanWunsch(doc1lemmas, doc2lemmas, false).get("score");
+                            String updateSqlString = "INSERT INTO alignments (FileName, Doc1Id, Doc2Id, Score) values ('"
+                                    + filename + "','" + doc1id + "','" + doc2id + "','" + score + "');";
+                            stmt.executeUpdate(updateSqlString);
                         }
                     }
                 }
@@ -111,9 +107,10 @@ public class Main {
             for (final File fileEntry : FOLDER.listFiles()) {
                 limit++;
                 checkstmt = dbConnection.createStatement();
-                String sql = "SELECT count(*) FROM documents WHERE FileName = '" + fileEntry.getName() + "';";
+                String sql = "SELECT count(*) FROM processed_documents WHERE FileName = '" + fileEntry.getName() + "';";
                 ResultSet res = checkstmt.executeQuery(sql);
                 res.next();
+                // so we can run it in differen executions
                 if (limit > FOLDER.listFiles().length) {
                     break;
                 } else if (res.getInt("count") > 0) {
@@ -121,30 +118,45 @@ public class Main {
                     continue;
                 } else {
                     checkstmt = dbConnection.createStatement();
-                    sql = "SELECT count(*) FROM documents";
+                    sql = "SELECT count(*) FROM processed_documents";
                     res = checkstmt.executeQuery(sql);
                     res.next();
-                    System.out.println("Total documents: " + res.getInt("count"));
+                    System.out.println("Total processed_documents: " + res.getInt("count"));
                     System.out.println("Reading file: " + fileEntry.getName());
                     Corpus corpus;
                     corpus = new Corpus(fileEntry.getAbsolutePath());
                     for (int i = 0; i < corpus.documents.size(); i++) {
                         // store every document
                         ArrayList<String> doc = corpus.documents.get(i);
+                        ArrayList<String> rawDoc = corpus.rawDocuments.get(i);
                         if (doc.size() > 0) {
                             stmt = dbConnection.createStatement();
 
-                            // FIXME: Is too hacky but apparently how all the kids are doing it.
-                            String docWordsString = "";
-                            for (String s : doc) {
-                                docWordsString += "\"" + s.replace("'", "''") + "\",";
+                            if (doc.size() >= minDocLength) {
+                                // FIXME: Is too hacky but apparently how all the kids are doing it.
+                                String docWordsString = "";
+                                for (String s : doc) {
+                                    docWordsString += "\"" + s.replace("'", "''") + "\",";
+                                }
+                                docWordsString = docWordsString.substring(0, docWordsString.length() - 1);
+                                docWordsString = "{" + docWordsString + "}";
+
+                                String rawDocWordsString = "";
+                                for (String sraw : rawDoc) {
+                                    rawDocWordsString += "\"" + sraw.replace("'", "''") + "\",";
+                                }
+                                rawDocWordsString = rawDocWordsString.substring(0, rawDocWordsString.length() - 1);
+                                rawDocWordsString = "{" + rawDocWordsString + "}";
+
+                                sql = "INSERT INTO processed_documents (FileType, FileName, Length, RawLemmas, TaggedLemmas) values ('"
+                                        + FILETYPE + "','"
+                                        + fileEntry.getName() + "','"
+                                        + doc.size() + "','"
+                                        + rawDocWordsString + "','"
+                                        + docWordsString
+                                        + "');";
+                                stmt.executeUpdate(sql);
                             }
-                            docWordsString = docWordsString.substring(0, docWordsString.length() - 1);
-                            docWordsString = "{" + docWordsString + "}";
-                            // FIXME: Should use minDocLength here
-                            sql = "INSERT INTO documents (FileType, FileName, Length, Lemmas) values ('"
-                                    + FILETYPE + "','" + fileEntry.getName() + "','"  + doc.size() + "','" + docWordsString + "');";
-                            stmt.executeUpdate(sql);
                         }
                     }
                     System.out.println("Done inserting file: " + fileEntry.getName());
@@ -173,11 +185,12 @@ public class Main {
                 DATA + LANG + "/np.dat",
                 DATA + LANG + "/quantities.dat",
                 DATA + LANG + "/probabilitats.dat");
+        Connection dbConnection = dbConnect();
+        Statement stmt = null;
+        HmmTagger tg = new HmmTagger( DATA + LANG + "/tagger.dat", true, 2 );
 
         try {
             writeDocuments();
-            // started at 12pm
-            // 42 minutes for ~< 700 documents (685)
             //calcAndWriteAlignments();
         } catch (Exception e) {
             e.printStackTrace();

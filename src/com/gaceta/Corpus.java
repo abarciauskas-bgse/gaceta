@@ -11,6 +11,7 @@ import java.util.HashMap;
  */
 public class Corpus {
     static ArrayList<ArrayList<String>> documents;
+    static ArrayList<ArrayList<String>> rawDocuments;
     static HashMap termDictionary;
     static int[][] documentTermMatrix;
     static Double[][] tfIdfMatrix;
@@ -54,7 +55,7 @@ public class Corpus {
         DataInputStream in = new DataInputStream(fstream);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
-        documents = readDocuments(br, mf);
+        this.readDocuments(br, mf);
         try {
             in.close();
         } catch (IOException e) {
@@ -62,28 +63,71 @@ public class Corpus {
         }
     }
 
-    public static ArrayList readDocuments(BufferedReader br, Maco mf) {
+    public static ArrayList genStopwords() {
+        ArrayList<String> stopwords = new ArrayList<>();
+        FileInputStream fstream = null;
+        try {
+            //http://www.cs.upc.edu/~padro/index.php?page=nlp
+            fstream = new FileInputStream("/Users/aimeebarciauskas/IdeaProjects/gaceta/empty.cat");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // Get the object of DataInputStream
+        DataInputStream in = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+        try {
+            String line;
+            while ((line = br.readLine()) != null) {
+                stopwords.add(line);
+            }
+        } catch (Exception e) {
+            System.out.println("Caught exception: " + e.getStackTrace());
+        }
+
+        return stopwords;
+    }
+
+    // QUANT, DATE, MISC, PER, LOC, ORG
+    public static String replaceNamedEntities(TokenF tf) {
+        String replaceNamedEntities = new String();
+        // FIXME: not intended use
+        if (tf.isQuantity()) {
+            replaceNamedEntities = "QUANT";
+        } else if (tf.isDate()) {
+            replaceNamedEntities = "DATE";
+        } else if (tf.isMiscellanea()) {
+            replaceNamedEntities = "MISC";
+        } else if (tf.isPerson()) {
+            replaceNamedEntities = "PER";
+        } else if (tf.isLocation()) {
+            replaceNamedEntities = "LOC";
+        } else if (tf.isOrganization()) {
+            replaceNamedEntities = "ORG";
+        } else if (tf.isProperNoun()) {
+            replaceNamedEntities = "NP";
+        } else {
+            replaceNamedEntities = tf.getLemma();
+        }
+
+        return replaceNamedEntities;
+    }
+
+    public void readDocuments(BufferedReader br, Maco mf) {
         LangIdent lgid = new LangIdent(DATA + "/common/lang_ident/ident.dat");
         ArrayList<ArrayList<String>> documents = new ArrayList<>();
+        ArrayList<ArrayList<String>> rawDocuments = new ArrayList<>();
         Tokenizer tk = new Tokenizer( DATA + LANG + "/tokenizer.dat" );
         Splitter sp = new Splitter( DATA + LANG + "/splitter.dat" );
         SWIGTYPE_p_splitter_status sid = sp.openSession();
+
+        ArrayList<String> stopwords = genStopwords();
 
         // instantiate list of documents
         //Read File Line By Line
         try {
             String line;
             while ((line = br.readLine()) != null) {
-
-                // Identify language of the text.
-                // Note that this will identify the language, but will NOT adapt
-                // the analyzers to the detected language.  All the processing
-                // in the loop below is done by modules for LANG (set to "es" at
-                // the beggining of this class) created above.
-                //String lg = lgid.identifyLanguage(line);
-                //System.out.println( "-------- LANG_IDENT results -----------" );
-                //System.out.println("Language detected (from first line in text): " + lg);
-
                 // Extract the tokens from the line of text.
                 ListWord l = tk.tokenize(line);
 
@@ -91,28 +135,40 @@ public class Corpus {
                 ListSentence ls = sp.split(sid, l, false);
                 mf.analyze(ls);
                 ListSentenceIterator sIt = new ListSentenceIterator(ls);
-;
+                int sentenceSeq = 0;
+
                 while (sIt.hasNext()) {
                     Sentence s = sIt.next();
+                    SentenceF sf = new SentenceF(s, sentenceSeq);
+                    sentenceSeq++;
                     ArrayList<String> docWords = new ArrayList<>();
+                    ArrayList<String> rawDocWords = new ArrayList<>();
                     ListWordIterator wIt = new ListWordIterator(s);
+                    int wordseq = 0;
                     while (wIt.hasNext()) {
                         Word w = wIt.next();
-                        String ts = w.getTag();
-                        // remove punctuation
+                        TokenF tokenf = new TokenF(sf, w, wordseq);
+                        String tag = tokenf.getPOS();
+                        String lemma = w.getLemma();
+                        wordseq++;
+                        // remove punctuation and stopwords
                         // FIXME: feels hacky, maybe use snowball?
-                        if (!ts.contains("F")) {
-                            docWords.add(w.getLemma());
+                        if (!(tag.contains("F") || stopwords.contains(lemma))) {
+                            String lemmaOrEntity = replaceNamedEntities(tokenf);
+                            docWords.add(lemmaOrEntity);
+                            rawDocWords.add(lemma);
                         }
                     }
                     documents.add(docWords);
+                    rawDocuments.add(rawDocWords);
                 }
             }
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
-        return documents;
+        this.rawDocuments = rawDocuments;
+        this.documents = documents;
     }
 
     // creates a dictionary of terms {term: index}
