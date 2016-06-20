@@ -5,14 +5,15 @@ import java.io.File;
 import java.sql.*;
 import java.util.*;
 import edu.upc.freeling.*;
+import static java.nio.file.StandardCopyOption.*;
 
 public class Main {
     // Modify this line to be your FreeLing installation directory
-    private static final String FREELINGDIR = "/usr";
+    private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
     private static final String LANG = "ca";
     private static final String FILETYPE = "SPLIT_NORM";
-    private static final java.io.File FOLDER = new java.io.File(FILETYPE);
+    private static final java.io.File FOLDER = new java.io.File("/Users/aimeebarciauskas/GACETA/" + FILETYPE);
     private static final int minDocLength = 4;
 
     public static Connection dbConnect() {
@@ -20,8 +21,7 @@ public class Main {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://gaceta-test-db.c7fydi4ldifd.us-east-1.rds.amazonaws.com:5432/gaceta",
-                            "gaceta", System.getenv("DB_PASSWORD"));
+                    .getConnection("jdbc:postgresql://localhost:5432/gaceta", "abarciauskas", "");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -140,6 +140,8 @@ public class Main {
                     }
                 }
                 System.out.println("Done inserting file: " + fileEntry.getName());
+                File afile = new File(fileEntry.getAbsolutePath());
+                afile.delete();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,7 +149,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        //System.load("/Users/aimeebarciauskas/Projects/freeling_src/APIs/java/libfreeling_javaAPI.dylib");
+        System.load("/Users/aimeebarciauskas/Projects/freeling_src/APIs/java/libfreeling_javaAPI.dylib");
 //
         Util.initLocale( "default" );
 
