@@ -59,15 +59,15 @@
   
   <target name="compile.module.gaceta" depends="compile.module.gaceta.production,compile.module.gaceta.tests" description="Compile module gaceta"/>
   
-  <target name="compile.module.gaceta.production" depends="register.custom.compilers" description="Compile module gaceta; production classes">
+  <target name="compile.module.gaceta.production" description="Compile module gaceta; production classes">
     <mkdir dir="${gaceta.output.dir}"/>
-    <javac2 destdir="${gaceta.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.gaceta}/javac">
+    <javac destdir="${gaceta.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.gaceta}/javac">
       <compilerarg line="${compiler.args.gaceta}"/>
       <bootclasspath refid="gaceta.module.bootclasspath"/>
       <classpath refid="gaceta.module.production.classpath"/>
       <src refid="gaceta.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.gaceta"/>
-    </javac2>
+    </javac>
     
     <copy todir="${gaceta.output.dir}">
       <fileset dir="${module.gaceta.basedir}/src">
@@ -77,7 +77,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.gaceta.tests" depends="register.custom.compilers,compile.module.gaceta.production" description="compile module gaceta; test classes" unless="skip.tests"/>
+  <target name="compile.module.gaceta.tests" depends="compile.module.gaceta.production" description="compile module gaceta; test classes" unless="skip.tests"/>
   
   <target name="clean.module.gaceta" description="cleanup module">
     <delete dir="${gaceta.output.dir}"/>
