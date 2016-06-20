@@ -165,7 +165,10 @@ public class Corpus {
             }
 
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Corpus error: " + e.getMessage() + ", stack trace: ");
+            e.printStackTrace();
+
+
         }
         this.rawDocuments = rawDocuments;
         this.documents = documents;

@@ -94,28 +94,28 @@ public class TokenF {
     }
     
     public boolean isPerson(){
-        if (this.POS != null){
+        if (this.POS != null && this.POS.length() >= 4){
             return (POS.charAt(4) =='S');
         }
         return false;
     }
     
     public boolean isLocation(){
-        if (this.POS != null){
+        if (this.POS != null && this.POS.length() >= 4){
             return (POS.charAt(4) =='G');
         }
         return false;
     }
     
     public boolean isOrganization(){
-        if (this.POS != null){
+        if (this.POS != null && this.POS.length() >= 4){
             return (POS.charAt(4) =='O');
         }
         return false;
     }
     
     public boolean isMiscellanea(){
-        if (this.POS != null){
+        if (this.POS != null && this.POS.length() >= 4){
             return (POS.charAt(4) =='V');
         }
         return false;

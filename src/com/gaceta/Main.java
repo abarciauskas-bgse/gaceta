@@ -8,11 +8,11 @@ import edu.upc.freeling.*;
 
 public class Main {
     // Modify this line to be your FreeLing installation directory
-    private static final String FREELINGDIR = "/usr/local";
+    private static final String FREELINGDIR = "/usr";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
     private static final String LANG = "ca";
     private static final String FILETYPE = "SPLIT_NORM";
-    private static final java.io.File FOLDER = new java.io.File("/Users/aimeebarciauskas/GACETA/" + FILETYPE);
+    private static final java.io.File FOLDER = new java.io.File(FILETYPE);
     private static final int minDocLength = 4;
 
     public static Connection dbConnect() {
@@ -20,7 +20,8 @@ public class Main {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/testdb", "abarciauskas", "");
+                    .getConnection("jdbc:postgresql://gaceta-test-db.c7fydi4ldifd.us-east-1.rds.amazonaws.com:5432/gaceta",
+                            "gaceta", System.getenv("DB_PASSWORD"));
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -101,66 +102,44 @@ public class Main {
         try {
             Connection dbConnection = dbConnect();
             Statement stmt = null;
-            Statement checkstmt = null;
-            int limit = 0;
+            String sql = null;
 
             for (final File fileEntry : FOLDER.listFiles()) {
-                limit++;
-                checkstmt = dbConnection.createStatement();
-                String sql = "SELECT count(*) FROM processed_documents WHERE FileName = '" + fileEntry.getName() + "';";
-                ResultSet res = checkstmt.executeQuery(sql);
-                res.next();
-                // so we can run it in differen executions
-                if (limit > FOLDER.listFiles().length) {
-                    break;
-                } else if (res.getInt("count") > 0) {
-                    System.out.println("Skipping " + fileEntry.getName());
-                    continue;
-                } else {
-                    checkstmt = dbConnection.createStatement();
-                    sql = "SELECT count(*) FROM processed_documents";
-                    res = checkstmt.executeQuery(sql);
-                    res.next();
-                    System.out.println("Total processed_documents: " + res.getInt("count"));
-                    System.out.println("Reading file: " + fileEntry.getName());
-                    Corpus corpus;
-                    corpus = new Corpus(fileEntry.getAbsolutePath());
-                    for (int i = 0; i < corpus.documents.size(); i++) {
-                        // store every document
-                        ArrayList<String> doc = corpus.documents.get(i);
-                        ArrayList<String> rawDoc = corpus.rawDocuments.get(i);
-                        if (doc.size() > 0) {
-                            stmt = dbConnection.createStatement();
-
-                            if (doc.size() >= minDocLength) {
-                                // FIXME: Is too hacky but apparently how all the kids are doing it.
-                                String docWordsString = "";
-                                for (String s : doc) {
-                                    docWordsString += "\"" + s.replace("'", "''") + "\",";
-                                }
-                                docWordsString = docWordsString.substring(0, docWordsString.length() - 1);
-                                docWordsString = "{" + docWordsString + "}";
-
-                                String rawDocWordsString = "";
-                                for (String sraw : rawDoc) {
-                                    rawDocWordsString += "\"" + sraw.replace("'", "''") + "\",";
-                                }
-                                rawDocWordsString = rawDocWordsString.substring(0, rawDocWordsString.length() - 1);
-                                rawDocWordsString = "{" + rawDocWordsString + "}";
-
-                                sql = "INSERT INTO processed_documents (FileType, FileName, Length, RawLemmas, TaggedLemmas) values ('"
-                                        + FILETYPE + "','"
-                                        + fileEntry.getName() + "','"
-                                        + doc.size() + "','"
-                                        + rawDocWordsString + "','"
-                                        + docWordsString
-                                        + "');";
-                                stmt.executeUpdate(sql);
+                Corpus corpus;
+                corpus = new Corpus(fileEntry.getAbsolutePath());
+                for (int i = 0; i < corpus.documents.size(); i++) {
+                    // store every document
+                    ArrayList<String> doc = corpus.documents.get(i);
+                    ArrayList<String> rawDoc = corpus.rawDocuments.get(i);
+                    if (doc.size() > 0) {
+                        stmt = dbConnection.createStatement();
+                        if (doc.size() >= minDocLength) {
+                            String docWordsString = "";
+                            for (String s : doc) {
+                                docWordsString += "\"" + s.replace("'", "''") + "\",";
                             }
+                            docWordsString = docWordsString.substring(0, docWordsString.length() - 1);
+                            docWordsString = "{" + docWordsString + "}";
+
+                            String rawDocWordsString = "";
+                            for (String sraw : rawDoc) {
+                                rawDocWordsString += "\"" + sraw.replace("'", "''") + "\",";
+                            }
+                            rawDocWordsString = rawDocWordsString.substring(0, rawDocWordsString.length() - 1);
+                            rawDocWordsString = "{" + rawDocWordsString + "}";
+
+                            sql = "INSERT INTO processed_documents (FileType, FileName, Length, RawLemmas, TaggedLemmas) values ('"
+                                    + FILETYPE + "','"
+                                    + fileEntry.getName() + "','"
+                                    + doc.size() + "','"
+                                    + rawDocWordsString + "','"
+                                    + docWordsString
+                                    + "');";
+                            stmt.executeUpdate(sql);
                         }
                     }
-                    System.out.println("Done inserting file: " + fileEntry.getName());
                 }
+                System.out.println("Done inserting file: " + fileEntry.getName());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,7 +147,7 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        System.load("/Users/aimeebarciauskas/Projects/freeling_src/APIs/java/libfreeling_javaAPI.dylib");
+        //System.load("/Users/aimeebarciauskas/Projects/freeling_src/APIs/java/libfreeling_javaAPI.dylib");
 //
         Util.initLocale( "default" );
 
@@ -185,13 +164,10 @@ public class Main {
                 DATA + LANG + "/np.dat",
                 DATA + LANG + "/quantities.dat",
                 DATA + LANG + "/probabilitats.dat");
-        Connection dbConnection = dbConnect();
-        Statement stmt = null;
-        HmmTagger tg = new HmmTagger( DATA + LANG + "/tagger.dat", true, 2 );
 
         try {
-            //writeDocuments();
-            calcAndWriteAlignments();
+            writeDocuments();
+            //calcAndWriteAlignments();
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
