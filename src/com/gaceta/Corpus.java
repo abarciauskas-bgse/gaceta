@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class Corpus {
     static ArrayList<ArrayList<String>> documents;
     static ArrayList<ArrayList<String>> rawDocuments;
+    static ArrayList<String> ogDocuments;
     static HashMap termDictionary;
     static int[][] documentTermMatrix;
     static Double[][] tfIdfMatrix;
@@ -117,6 +118,7 @@ public class Corpus {
         LangIdent lgid = new LangIdent(DATA + "/common/lang_ident/ident.dat");
         ArrayList<ArrayList<String>> documents = new ArrayList<>();
         ArrayList<ArrayList<String>> rawDocuments = new ArrayList<>();
+        ArrayList<String> ogDocuments = new ArrayList<>();
         Tokenizer tk = new Tokenizer( DATA + LANG + "/tokenizer.dat" );
         Splitter sp = new Splitter( DATA + LANG + "/splitter.dat" );
         SWIGTYPE_p_splitter_status sid = sp.openSession();
@@ -143,6 +145,7 @@ public class Corpus {
                     sentenceSeq++;
                     ArrayList<String> docWords = new ArrayList<>();
                     ArrayList<String> rawDocWords = new ArrayList<>();
+                    String ogDoc = "";
                     ListWordIterator wIt = new ListWordIterator(s);
                     int wordseq = 0;
                     while (wIt.hasNext()) {
@@ -158,9 +161,11 @@ public class Corpus {
                             docWords.add(lemmaOrEntity);
                             rawDocWords.add(lemma);
                         }
+                        ogDoc += lemma + " ";
                     }
                     documents.add(docWords);
                     rawDocuments.add(rawDocWords);
+                    ogDocuments.add(ogDoc);
                 }
             }
 
@@ -172,6 +177,7 @@ public class Corpus {
         }
         this.rawDocuments = rawDocuments;
         this.documents = documents;
+        this.ogDocuments = ogDocuments;
     }
 
     // creates a dictionary of terms {term: index}

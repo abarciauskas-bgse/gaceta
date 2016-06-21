@@ -111,6 +111,7 @@ public class Main {
                     // store every document
                     ArrayList<String> doc = corpus.documents.get(i);
                     ArrayList<String> rawDoc = corpus.rawDocuments.get(i);
+                    String ogDoc = corpus.ogDocuments.get(i);
                     if (doc.size() > 0) {
                         stmt = dbConnection.createStatement();
                         if (doc.size() >= minDocLength) {
@@ -128,12 +129,17 @@ public class Main {
                             rawDocWordsString = rawDocWordsString.substring(0, rawDocWordsString.length() - 1);
                             rawDocWordsString = "{" + rawDocWordsString + "}";
 
-                            sql = "INSERT INTO processed_documents (FileType, FileName, Length, RawLemmas, TaggedLemmas) values ('"
+                            //System.out.println(ogDoc);
+                            //System.out.println("");
+                            String replacedString = ogDoc.replace("'", "");
+
+                            sql = "INSERT INTO processed_documents (FileType, FileName, Length, RawLemmas, TaggedLemmas, Original) values ('"
                                     + FILETYPE + "','"
                                     + fileEntry.getName() + "','"
                                     + doc.size() + "','"
                                     + rawDocWordsString + "','"
-                                    + docWordsString
+                                    + docWordsString + "','"
+                                    + replacedString
                                     + "');";
                             stmt.executeUpdate(sql);
                         }
