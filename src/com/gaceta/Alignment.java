@@ -11,7 +11,7 @@ import java.sql.*;
  */
 public class Alignment {
     //  chosen arbitrarily
-    static int gapPenalty = -2;
+    static int gapPenalty = -1;
     // needlemanWunsch computes global alignment between 2 sequences
     // http://www.slideshare.net/avrilcoghlan/the-needleman-wunsch-algorithm
     // https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm
