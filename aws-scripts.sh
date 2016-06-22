@@ -4,6 +4,9 @@ sudo apt-get update
 sudo apt-get lftp
 sudo apt-get postgresql-client-common
 sudo apt-get postgres-xc-client
+sudo apt-get install swig
+sudo apt-get install make
+sudo apt-get install g++
 
 mkdir SPLIT_NORM
 cd SPLIT_NORM

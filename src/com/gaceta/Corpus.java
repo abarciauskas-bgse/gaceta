@@ -19,7 +19,7 @@ public class Corpus {
     // Modify this line to be your FreeLing installation directory
     private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
-    private static final String LANG = "ca";
+    private static final String LANG = "ca"; // FIXME
 
     public Corpus (String filename)
     {
@@ -69,7 +69,8 @@ public class Corpus {
         FileInputStream fstream = null;
         try {
             //http://www.cs.upc.edu/~padro/index.php?page=nlp
-            fstream = new FileInputStream("/Users/aimeebarciauskas/IdeaProjects/gaceta/empty.cat");
+            // FIXME: dependent on lang once that is fixed
+            fstream = new FileInputStream("/Users/aimeebarciauskas/IdeaProjects/gaceta/empty.en");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -161,7 +162,15 @@ public class Corpus {
                             docWords.add(lemmaOrEntity);
                             rawDocWords.add(lemma);
                         }
-                        ogDoc += lemma + " ";
+                        if (tag.contains("F")) {
+                            ogDoc += tokenf.getStr();
+                        } else {
+                            if (wordseq > 1) {
+                                ogDoc += " " + tokenf.getStr();
+                            } else {
+                                ogDoc += tokenf.getStr();
+                            };
+                        }
                     }
                     documents.add(docWords);
                     rawDocuments.add(rawDocWords);

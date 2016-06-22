@@ -11,9 +11,10 @@ public class Main {
     // Modify this line to be your FreeLing installation directory
     private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
-    private static final String LANG = "ca";
-    private static final String FILETYPE = "SPLIT_NORM";
-    private static final java.io.File FOLDER = new java.io.File("/Users/aimeebarciauskas/GACETA/" + FILETYPE);
+    private static final String FILETYPE = "gold_data/minutes/txt";
+    private static final java.io.File FOLDER = new java.io.File("/Users/aimeebarciauskas/IdeaProjects/temp_data/" + FILETYPE);
+//    private static final String FILETYPE = "SPLIT_NORM";
+//    private static final java.io.File FOLDER = new java.io.File("/Users/aimeebarciauskas/IdeaProjects/temp_data/" + FILETYPE);
     private static final int minDocLength = 4;
 
     public static Connection dbConnect() {
@@ -52,7 +53,6 @@ public class Main {
             System.err.println("Error: " + e.getMessage());
         }
         System.out.println("Total number of distinct documents: " + filenames.size());
-
 
         for (int fidx = 0; fidx < filenames.size(); fidx ++) {
             String filename = filenames.get(fidx);
@@ -129,10 +129,7 @@ public class Main {
                             rawDocWordsString = rawDocWordsString.substring(0, rawDocWordsString.length() - 1);
                             rawDocWordsString = "{" + rawDocWordsString + "}";
 
-                            //System.out.println(ogDoc);
-                            //System.out.println("");
                             String replacedString = ogDoc.replace("'", "");
-
                             sql = "INSERT INTO processed_documents (FileType, FileName, Length, RawLemmas, TaggedLemmas, Original) values ('"
                                     + FILETYPE + "','"
                                     + fileEntry.getName() + "','"
@@ -156,22 +153,6 @@ public class Main {
     }
     public static void main(String[] args) {
         System.load("/Users/aimeebarciauskas/Projects/freeling_src/APIs/java/libfreeling_javaAPI.dylib");
-//
-        Util.initLocale( "default" );
-
-        // Create options set for maco analyzer.
-        // Default values are Ok, except for data files.
-        MacoOptions op = new MacoOptions( LANG );
-
-        op.setDataFiles( "",
-                DATA + "common/punct.dat",
-                DATA + LANG + "/dicc.src",
-                DATA + LANG + "/afixos.dat",
-                "",
-                DATA + LANG + "/locucions.dat",
-                DATA + LANG + "/np.dat",
-                DATA + LANG + "/quantities.dat",
-                DATA + LANG + "/probabilitats.dat");
 
         try {
             writeDocuments();
