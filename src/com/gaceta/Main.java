@@ -22,7 +22,7 @@ public class Main {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/gaceta", "abarciauskas", "");
+                    .getConnection("jdbc:postgresql://localhost:5432/fomc", "abarciauskas", "");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
