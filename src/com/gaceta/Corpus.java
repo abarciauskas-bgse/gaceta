@@ -21,7 +21,7 @@ public class Corpus {
     private static final String DATA = FREELINGDIR + "/share/freeling/";
     private static final String LANG = "ca"; // FIXME
 
-    public Corpus (String filename)
+    public Corpus (File[] filenames)
     {
         Util.initLocale( "default" );
 
@@ -44,24 +44,26 @@ public class Corpus {
                 true, true, false, true,  // submodules are to be used.
                 true, true, true, true);  // default: all created submodules
 
-        // Open the file that is the first
-        // command line parameter
-        FileInputStream fstream = null;
-        try {
-            fstream = new FileInputStream(filename);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        // Get the object of DataInputStream
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        ArrayList<BufferedReader> brs = new ArrayList<>();
 
-        this.readDocuments(br, mf);
-        try {
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (File file : filenames) {
+            String filename = file.getAbsolutePath();
+            // Open the file that is the first
+            // command line parameter
+            FileInputStream fstream = null;
+            try {
+                fstream = new FileInputStream(filename);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            // Get the object of DataInputStream
+            DataInputStream in = new DataInputStream(fstream);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            brs.add(br);
         }
+
+
+        this.readDocuments(brs, mf);
     }
 
     public static ArrayList genStopwords() {
@@ -115,7 +117,7 @@ public class Corpus {
         return replaceNamedEntities;
     }
 
-    public void readDocuments(BufferedReader br, Maco mf) {
+    public void readDocuments(ArrayList<BufferedReader> brs, Maco mf) {
         LangIdent lgid = new LangIdent(DATA + "/common/lang_ident/ident.dat");
         ArrayList<ArrayList<String>> documents = new ArrayList<>();
         ArrayList<ArrayList<String>> rawDocuments = new ArrayList<>();
@@ -126,64 +128,65 @@ public class Corpus {
 
         ArrayList<String> stopwords = genStopwords();
 
+        for (BufferedReader br : brs) {
+            try {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    // Extract the tokens from the line of text.
+                    ListWord l = tk.tokenize(line);
+
+                    // Split the tokens into distinct sentences.
+                    ListSentence ls = sp.split(sid, l, false);
+                    mf.analyze(ls);
+                    ListSentenceIterator sIt = new ListSentenceIterator(ls);
+                    int sentenceSeq = 0;
+
+                    while (sIt.hasNext()) {
+                        Sentence s = sIt.next();
+                        SentenceF sf = new SentenceF(s, sentenceSeq);
+                        sentenceSeq++;
+                        ArrayList<String> docWords = new ArrayList<>();
+                        ArrayList<String> rawDocWords = new ArrayList<>();
+                        String ogDoc = "";
+                        ListWordIterator wIt = new ListWordIterator(s);
+                        int wordseq = 0;
+                        while (wIt.hasNext()) {
+                            Word w = wIt.next();
+                            TokenF tokenf = new TokenF(sf, w, wordseq);
+                            String tag = tokenf.getPOS();
+                            String lemma = w.getLemma();
+                            wordseq++;
+                            // remove punctuation and stopwords
+                            // FIXME: feels hacky, maybe use snowball?
+                            if (!(tag.contains("F") || stopwords.contains(lemma))) {
+                                String lemmaOrEntity = replaceNamedEntities(tokenf);
+                                docWords.add(lemmaOrEntity);
+                                rawDocWords.add(lemma);
+                            }
+                            if (tag.contains("F")) {
+                                ogDoc += tokenf.getStr();
+                            } else {
+                                if (wordseq > 1) {
+                                    ogDoc += " " + tokenf.getStr();
+                                } else {
+                                    ogDoc += tokenf.getStr();
+                                };
+                            }
+                        }
+                        documents.add(docWords);
+                        rawDocuments.add(rawDocWords);
+                        ogDocuments.add(ogDoc);
+                    }
+                }
+
+            } catch (Exception e) {
+                System.err.println("Corpus error: " + e.getMessage() + ", stack trace: ");
+                e.printStackTrace();
+            }
+        }
         // instantiate list of documents
         //Read File Line By Line
-        try {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // Extract the tokens from the line of text.
-                ListWord l = tk.tokenize(line);
 
-                // Split the tokens into distinct sentences.
-                ListSentence ls = sp.split(sid, l, false);
-                mf.analyze(ls);
-                ListSentenceIterator sIt = new ListSentenceIterator(ls);
-                int sentenceSeq = 0;
-
-                while (sIt.hasNext()) {
-                    Sentence s = sIt.next();
-                    SentenceF sf = new SentenceF(s, sentenceSeq);
-                    sentenceSeq++;
-                    ArrayList<String> docWords = new ArrayList<>();
-                    ArrayList<String> rawDocWords = new ArrayList<>();
-                    String ogDoc = "";
-                    ListWordIterator wIt = new ListWordIterator(s);
-                    int wordseq = 0;
-                    while (wIt.hasNext()) {
-                        Word w = wIt.next();
-                        TokenF tokenf = new TokenF(sf, w, wordseq);
-                        String tag = tokenf.getPOS();
-                        String lemma = w.getLemma();
-                        wordseq++;
-                        // remove punctuation and stopwords
-                        // FIXME: feels hacky, maybe use snowball?
-                        if (!(tag.contains("F") || stopwords.contains(lemma))) {
-                            String lemmaOrEntity = replaceNamedEntities(tokenf);
-                            docWords.add(lemmaOrEntity);
-                            rawDocWords.add(lemma);
-                        }
-                        if (tag.contains("F")) {
-                            ogDoc += tokenf.getStr();
-                        } else {
-                            if (wordseq > 1) {
-                                ogDoc += " " + tokenf.getStr();
-                            } else {
-                                ogDoc += tokenf.getStr();
-                            };
-                        }
-                    }
-                    documents.add(docWords);
-                    rawDocuments.add(rawDocWords);
-                    ogDocuments.add(ogDoc);
-                }
-            }
-
-        } catch (Exception e) {
-            System.err.println("Corpus error: " + e.getMessage() + ", stack trace: ");
-            e.printStackTrace();
-
-
-        }
         this.rawDocuments = rawDocuments;
         this.documents = documents;
         this.ogDocuments = ogDocuments;

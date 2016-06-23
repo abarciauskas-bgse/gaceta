@@ -158,16 +158,21 @@ public class Main {
             Connection dbConnection = dbConnect();
             Statement stmt = null;
             String sql = null;
+            Corpus corpus;
+            corpus = new Corpus(FOLDER.listFiles());
+            corpus.createTermDictionary();
+            corpus.createDocumentTermMatrix();
+            corpus.createTfIdfMatrix();
 
-            for (final File fileEntry : FOLDER.listFiles()) {
-                Corpus corpus;
-                corpus = new Corpus(fileEntry.getAbsolutePath());
+            try {
                 for (int i = 0; i < corpus.documents.size(); i++) {
                     // store every document
                     ArrayList<String> doc = corpus.documents.get(i);
                     float occurrences = Collections.frequency(doc, "NP");
                     ArrayList<String> rawDoc = corpus.rawDocuments.get(i);
                     String ogDoc = corpus.ogDocuments.get(i);
+                    java.lang.Double[] tfidfVector = corpus.tfIdfMatrix[i];
+
                     if (doc.size() > 0 && occurrences/doc.size() < 0.5) {
                         stmt = dbConnection.createStatement();
                         if (doc.size() >= minDocLength) {
@@ -185,22 +190,31 @@ public class Main {
                             rawDocWordsString = rawDocWordsString.substring(0, rawDocWordsString.length() - 1);
                             rawDocWordsString = "{" + rawDocWordsString + "}";
 
+                            String tfidfArr = "";
+                            for (Double v : tfidfVector) {
+                                tfidfArr += v + ",";
+                            }
+                            tfidfArr = tfidfArr.substring(0, tfidfArr.length() - 1);
+                            tfidfArr = "{" + tfidfArr + "}";
+
                             String replacedString = ogDoc.replace("'", "");
-                            sql = "INSERT INTO processed_documents (FileType, FileName, Length, RawLemmas, TaggedLemmas, Original) values ('"
+                            sql = "INSERT INTO processed_documents (FileType, Year, Length, RawLemmas, TaggedLemmas, TfIdfVector, Original) values ('"
                                     + FILETYPE + "','"
-                                    + fileEntry.getName() + "','"
+                                    + 2007 + "','"
                                     + doc.size() + "','"
                                     + rawDocWordsString + "','"
                                     + docWordsString + "','"
+                                    + tfidfArr + "','"
                                     + replacedString
                                     + "');";
-                            stmt.executeUpdate(sql);
+                            System.out.println(sql);
+                            //stmt.executeUpdate(sql);
                         }
                     }
                 }
-                System.out.println("Done inserting file: " + fileEntry.getName());
-                File afile = new File(fileEntry.getAbsolutePath());
-                afile.delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Error: " + e.getMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();

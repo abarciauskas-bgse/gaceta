@@ -1,10 +1,11 @@
 CREATE TABLE processed_documents (
     Id                    serial PRIMARY KEY,
     FileType              varchar(50),
-    FileName              varchar(50),
+    Year                  smallint,
     Length                smallint,
     RawLemmas             varchar[],
     TaggedLemmas          varchar[],
+    TfIdfVector           decimal[],
     Original              text
 );
 
