@@ -20,7 +20,7 @@ public class Main {
     //private static final String FILETYPE = "SPLIT_NORM";
     private static final java.io.File FOLDER = new java.io.File("/Users/aimeebarciauskas/IdeaProjects/temp_data/" + FILETYPE);
     private static final int minDocLength = 4;
-    private static final String YEAR = "2007";
+    private static final String YEAR = "2005";
 
     public static Connection dbConnect() {
         Connection c = null;
@@ -108,7 +108,7 @@ public class Main {
             stmt = dbConnection.createStatement();
             ResultSet result = stmt.executeQuery(sql);
             int currCorpiiId = result.findColumn("max");
-            currCorpiiId += 1;
+            currCorpiiId = 4; //FIXME: SHOULD BE currCorpiiId + 1;
             System.out.println("Corpii id: " + currCorpiiId);
 
             Corpus corpus;

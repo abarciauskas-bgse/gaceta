@@ -24,7 +24,7 @@ CREATE TABLE alignments (
     Id serial PRIMARY KEY,
     Doc1Id int REFERENCES processed_documents (Id),
     Doc2Id int REFERENCES processed_documents (Id),
-    Score int,
+    NwScore int,
     Year varchar(20),
     CosineSimilarity decimal
 );
