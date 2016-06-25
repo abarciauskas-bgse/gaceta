@@ -127,8 +127,10 @@ public class Corpus {
         SWIGTYPE_p_splitter_status sid = sp.openSession();
 
         ArrayList<String> stopwords = genStopwords();
-
+        int counter = 0;
         for (BufferedReader br : brs) {
+            counter += 1;
+            System.out.println("Processing file: " + counter + " of " + brs.size());
             try {
                 String line;
                 while ((line = br.readLine()) != null) {
@@ -158,12 +160,12 @@ public class Corpus {
                             wordseq++;
                             // remove punctuation and stopwords
                             // FIXME: feels hacky, maybe use snowball?
-                            if (!(tag.contains("F") || stopwords.contains(lemma))) {
+                            if (!(tag.matches("F(.*)") || stopwords.contains(lemma))) {
                                 String lemmaOrEntity = replaceNamedEntities(tokenf);
                                 docWords.add(lemmaOrEntity);
                                 rawDocWords.add(lemma);
                             }
-                            if (tag.contains("F")) {
+                            if (tag.matches("F(.*)")) {
                                 ogDoc += tokenf.getStr();
                             } else {
                                 if (wordseq > 1) {
