@@ -19,7 +19,7 @@ public class Corpus {
     // Modify this line to be your FreeLing installation directory
     private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
-    private static final String LANG = "ca"; // FIXME
+    private static final String LANG = "ca";
     private static final boolean use_porter = true;
 
     public Corpus (File[] filenames)
@@ -95,7 +95,8 @@ public class Corpus {
 
     // QUANT, DATE, MISC, PER, LOC, ORG
     public static String replaceNamedEntities(TokenF tf) {
-        String replaceNamedEntities = new String();
+        PorterStemmer stemmer = new PorterStemmer();
+        String replaceNamedEntities;
         // FIXME: not intended use
         if (tf.isQuantity()) {
             replaceNamedEntities = "QUANT";
@@ -112,7 +113,11 @@ public class Corpus {
         } else if (tf.isProperNoun()) {
             replaceNamedEntities = "NP";
         } else {
-            replaceNamedEntities = tf.getLemma();
+            if (use_porter) {
+                replaceNamedEntities = stemmer.stem(tf.getLemma());
+            } else {
+                tf.getLemma();
+            }
         }
 
         return replaceNamedEntities;
@@ -126,7 +131,6 @@ public class Corpus {
         Tokenizer tk = new Tokenizer( DATA + LANG + "/tokenizer.dat" );
         Splitter sp = new Splitter( DATA + LANG + "/splitter.dat" );
         SWIGTYPE_p_splitter_status sid = sp.openSession();
-        PorterStemmer stemmer = new PorterStemmer();
 
         ArrayList<String> stopwords = genStopwords();
         int counter = 0;
@@ -158,13 +162,7 @@ public class Corpus {
                             Word w = wIt.next();
                             TokenF tokenf = new TokenF(sf, w, wordseq);
                             String tag = tokenf.getPOS();
-                            String lemma = stemmer.stem(w.getLemma());
-//                            if (use_porter) {
-//                                String new_lemma = stemmer.stem(lemma);
-//                                if (new_lemma != lemma) {
-//                                    System.out.println("Updated lemma '" + lemma + "' to '" + new_lemma + "'");
-//                                }
-//                            }
+                            String lemma = w.getLemma();
                             wordseq++;
                             // remove punctuation and stopwords
                             // FIXME: feels hacky, maybe use snowball?

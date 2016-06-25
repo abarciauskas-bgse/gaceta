@@ -8,7 +8,7 @@ CREATE UNIQUE INDEX corpii_id ON corpii (Id);
 
 CREATE TABLE processed_documents (
     Id                    serial PRIMARY KEY,
-    CorpiiId              int REFERENCES corpii (Id),
+    CorpiiId              int REFERENCES corpii (Id) ON DELETE CASCADE,
     FileType              varchar(50),
     Year                  varchar(20),
     Length                smallint,
@@ -22,8 +22,8 @@ CREATE UNIQUE INDEX processed_documents_id ON processed_documents (Id);
 
 CREATE TABLE alignments (
     Id serial PRIMARY KEY,
-    Doc1Id int REFERENCES processed_documents (Id),
-    Doc2Id int REFERENCES processed_documents (Id),
+    Doc1Id int REFERENCES processed_documents (Id) ON DELETE CASCADE,
+    Doc2Id int REFERENCES processed_documents (Id) ON DELETE CASCADE,
     NwScore int,
     Year varchar(20),
     CosineSimilarity decimal
@@ -32,5 +32,5 @@ CREATE TABLE alignments (
 CREATE UNIQUE INDEX alignments_id ON alignments (Id);
 CREATE UNIQUE INDEX alignments_docIds_idx ON alignments (Doc1Id, Doc2Id);
 
-# DROP TABLE alignments;
-# DROP TABLE processed_documents;
+-- DROP TABLE alignments;
+-- DROP TABLE processed_documents;
