@@ -20,7 +20,7 @@ public class Corpus {
     private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
     private static final String LANG = "ca";
-    private static final boolean use_porter = true;
+    private static final boolean use_porter = false;//true;
 
     public Corpus (File[] filenames)
     {
@@ -116,7 +116,7 @@ public class Corpus {
             if (use_porter) {
                 replaceNamedEntities = stemmer.stem(tf.getLemma());
             } else {
-                tf.getLemma();
+                replaceNamedEntities = tf.getLemma();
             }
         }
 

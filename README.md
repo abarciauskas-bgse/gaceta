@@ -8,14 +8,14 @@
 
 ### Data extraction process was as follows:
 
-1. Copy data to temporary directory (it is deleted during the database writing process so that we know which files have already been processed if process needs to be killed or dies)
+1. Copy data to directory (it is deleted during the database writing process so that we know which files have already been processed if process needs to be killed or dies)
 
 ```bash
 cp -r IdeaProjects/data/* IdeaProjects/temp_data
 ```
 
-2. Update the code base to use the correct directory, default language, and stop words file for either the FOMC or Gaceta data.
-3. Select a subinterval of time overwhich to conduct the analysis. For FOMC, a year is chosen, for Gaceta, a month-year pair was more reasonable.
+2. Update the code base to use the local directory (in `Main.java`), `use_porter = true` if english (in `Corpus.java`), and stopwords file for either the FOMC or Gaceta data.
+3. Select a subinterval (`YEAR` in `Main.java`) of time overwhich to conduct the analysis. For FOMC, a year is chosen, for Gaceta, a month-year pair was more reasonable.
 3. Run `writeDocuments` which stores sentences as documents in the database (see `schema.sql` for more information)
 4. Run `calcAndWriteAlignments` which calculates and stores Needleman-Wunsch sequence alignment scores
     * Calculating alignments for 1000 FOMC documents (e.g. 499500 alignments) took about 3 minutes, but this scales by a power so we would expect calculating alignments for 2000 documents to take 10 minutes (3**2).

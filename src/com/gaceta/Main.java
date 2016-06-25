@@ -14,13 +14,13 @@ public class Main {
     // Modify this line to be your FreeLing installation directory
     private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
-    private static final String DATABASE = "fomc";
-    private static final String FILETYPE = "gold_data/minutes/txt";
-    //private static final String DATABASE = "gaceta";
-    //private static final String FILETYPE = "SPLIT_NORM";
+//    private static final String DATABASE = "fomc";
+//    private static final String FILETYPE = "gold_data/minutes/txt";
+    private static final String DATABASE = "gaceta";
+    private static final String FILETYPE = "SPLIT_NORM";
     private static final java.io.File FOLDER = new java.io.File("/Users/aimeebarciauskas/IdeaProjects/temp_data/" + FILETYPE);
     private static final int minDocLength = 4;
-    private static final String YEAR = "2006";
+    private static final String YEAR = "3-2015";
 
     public static Connection dbConnect() {
         Connection c = null;
@@ -108,7 +108,7 @@ public class Main {
             stmt = dbConnection.createStatement();
             ResultSet result = stmt.executeQuery(sql);
             int currCorpiiId = result.findColumn("max");
-            currCorpiiId = 5; //FIXME: SHOULD BE currCorpiiId + 1;
+            currCorpiiId = 3;//currCorpiiId + 1;
             System.out.println("Corpii id: " + currCorpiiId);
 
             Corpus corpus;
