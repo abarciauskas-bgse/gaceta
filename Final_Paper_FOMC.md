@@ -254,6 +254,8 @@ Given `k` is the number of supernodes allowed, one iteration of the Karger algor
 
 One iteration of the Karger algorithm finds a minimum cut with very low probability. Running the algorithm many times and keeping track of the minimum number of crossing edges finds the minimum cut with high probability.
 
+[Source code](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/karger_run.py)
+
 ### Minimum k-cut Approximation
 
 The Karger algorithm randomly contracts edges creating supernodes until $k$ supernodes are left. The probability of finding the minimum cut on any one iteration is very low, but the probability given many iterations is very high. Asymptotically the probability of finding the minimum cut goes to 1.
@@ -314,7 +316,7 @@ ____
 
 Not being an expert in FOMC proceedings, these look a good summary of  meetings: asessment of market conditions and implementation of monetary policy to maintain price stability through adjusments to the federal funds rate.
 
-Code used for this analysis may be found in the codebase [here](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/Redundancy%20Clusters%20(FOMC%2C%202005).ipynb).
+[Source code](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/Redundancy%20Clusters%20(FOMC%2C%202005).ipynb).
 
 Please see **Appendix A** for results from 2006 and 2007.
 
@@ -452,7 +454,7 @@ The results of the algorithm for the top 5 clusters found for 2007 FOMC minutes 
 | read        |                    1 |
 | coupl       |                    1 |
 
-Code used for this analysis may be found in the codebase [here](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/Minimum%20k-Cut%20(FOMC%2C%202007).ipynb).
+[Source code](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/Minimum%20k-Cut%20(FOMC%2C%202007).ipynb).
 
 Results for 2005 and 2006 are listed in **Appendix B**
 
