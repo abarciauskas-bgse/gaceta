@@ -1,44 +1,27 @@
+<h1 style="font-size: 32px">Redundancy in Government Documents</h1>
 
-# Redundancy in Government Documents
+Aimee Barciauskas &nbsp; | &nbsp; aimee.barciauskas@barcelonagse.eu   &nbsp; | &nbsp; 2016 June 27
 
-*Author:* Aimee Barciauskas
-<br />
-*Date:* June 27, 2016
+**Table of Contents**
 
-## Table of Contents
-
-#### Abstract
-
-#### Introduction
-
-#### A Review of Current Methods
-
-#### Data
-
-#### Question
-
-#### Extracting Content
-
-#### Methodologies
-
-#### Addressing the Question
+[toc]
 
 # Abstract
 
-E-government initiatives offer unprecedented transparency into government proceedings. However, gaining understanding of a large corpus is often unmanageable for the average citizen. Furthermore, the use of "administrative jargon" creates a barrier for the general public. Exploiting and exploring redundancy in these texts may facilitate summarization, insights and visualization.
+E-government initiatives offer unprecedented transparency into government proceedings. However, gaining understanding of a large corpus is often unmanageable for the average citizen. Furthermore, the use of "administrative jargon" is a barrier for the general public. Exploiting and exploring redundancy in these texts may facilitate summarization, insights and visualization.
 
 
 
 
 # Introduction
 
-### Redundancy and Similarity
+## Redundancy and Similarity
 
-Measures of similarity can be used to signal redundancy, where redundancy is considered as a more strict definition of similarity. For example, "my dog ate my homework" and "my assignment is eaten by a canine" are both similar and redundant, whereas the former is completely similar, in one sense, to "My homework is to write about what my dog ate" but not redundant.
+Measures of similarity can be used to signal redundancy, where redundancy is considered a more strict definition of similarity. For example, "my dog ate my homework" and "my assignment is eaten by a canine" are both similar and redundant, whereas the former is completely similar to "My homework is to write about what my dog ate" in the intersection of words, but not redundant.
 
-Given the relationship between similarity and redundancy, using similarity measures a threshold for  redundancy may be gleaned from human experts. In other words, the threshold for some similarity measuring signaling redundancy is a heuristic developed below.
+Given the relationship between similarity and redundancy, similarity measures thresholded at some level signaling redundancy may be gleaned from human experts. The threshold for a similarity measure signaling redundancy is developed later in this paper.
 
-### Methodologies
+## Methodologies
 
 This paper uses 2 methods to measure and analyze redundancy:
 
@@ -52,23 +35,20 @@ Cosine similarity scores between pairs of sentences' tf-idf vectors are used to 
 
 For both methods, cluster centroids are found as representatives of the cluster. For the latter method, it also makes sense to look at the most common terms and their relative frequencies in a given cluster given other clusters.
 
-### Code and Data
+## Code and Data
 
-The sources of data for this study were the Gaceta Municipal de Barcelona and FOMC minutes, so references to both data sources may be found in the codebase.
+The sources of data for this study were the Gaceta Municipal de Barcelona and FOMC minutes, so references to both data sources are found in the codebase.
 
-For the duration of this paper, analysis is restricted to FOMC texts. The reason is straight-forward: analysis of results of included methodologies is impossible for a non-catalan speaker. Results are for Gaceta are included in the code base but analysis of them is awaiting a native Catalan speaker.
+For the duration of this paper, analysis is restricted to FOMC texts. The reason is straight-forward: analysis of results is impossible for a non-Catalan speaker. Results are for Gaceta are included in the code base, but analysis of them is awaiting a native Catalan speaker.
 
-The codebase for this project is here: [github.com/abarciauskas-bgse/gaceta](https://github.com/abarciauskas-bgse/gaceta).
-
-Python code used for analysis can be found in the [python_scripts/](https://github.com/abarciauskas-bgse/gaceta/tree/master/python_scripts) directory of the codebase.
-
+The codebase for this project: [github.com/abarciauskas-bgse/gaceta](https://github.com/abarciauskas-bgse/gaceta). Python code used for analysis can be found in the [python_scripts/](https://github.com/abarciauskas-bgse/gaceta/tree/master/python_scripts) directory.
 
 
 # A Review of Current Methods
 
 To inform a specification of methods for analyzing redundancy for this project, a review of existing methods is conducted and is summarized below.
 
-### Methods to Measure Similarity and Redundancy
+## Methods to Measure Similarity and Redundancy
 
 In the existing literature, measurements of similarity have been separated into **corpus-**, **knowledge-**, and **hybrid-based** methods. Hybrid methods are excluded from the current review.
 
@@ -76,23 +56,23 @@ The practical difference between corpus and knowledge-based methods is the corpu
 
 All methods listed below are included given their pertinence to the current problem.
 
-#### Corpus-Based Word Similarity
+### Corpus-Based Word Similarity
 
 The bag-of-words (BOW) method is often used as a baseline measurement of similarity between documents. Given a document-term matrix, taking the dot product or cosine of the dot-product between two columns (e.g. documents) gives a BOW-based similarity score of those two documents. The same method can be followed for the tf-idf version of this matrix.
 
 [Latent Semantic Analysis](https://en.wikipedia.org/wiki/Latent_semantic_analysis) (LSA) measures the similarity between words using singular value decomposition on a word-count per document (e.g. words x documents, or transpose of the document-term matrix) matrix and computing the cosine of the dot product between 2 rows. This within-corpus word similarity measure will enrich measurements of similarity when comparing documents in methods for computing sentence-based similarities in what follows.
 
-#### Knowlege-Based Word Similarity
+### Knowlege-Based Word Similarity
 
 WordNet bag-of-words (WBOW) is a "knowledge-based" version of Latent Semantic Analysis and is frequently used to enrich measurements of similarity in texts. WordNets are human-generated lexicons and thus do not require the pre-computation or corpus-dependency of LSA. WordNets are popular but may be limited in depth. It will be interesting to see what is available for Catalan.
 
-#### Knowledge-Based Document Similarity
+### Knowledge-Based Document Similarity
 
 Knowledge-based document similarity measures listed in [Atoum](https://www.researchgate.net/publication/294873785_A_Comprehensive_Comparative_Study_of_Word_and_Sentence_Similarity_Measures) use a knowledge-based measurement of word similarity within a document and some quantification for document structure. For example, measurments composed of [WBOW plus part-of-speech (POS) tree kernels](http://ieeexplore.ieee.org/xpl/) or [POS tags](http://www.sciencedirect.com/science/article/pii/S0957417410011875?np=y). Others are listed in [Atoum Section 2.2.2](https://www.researchgate.net/publication/294873785_A_Comprehensive_Comparative_Study_of_Word_and_Sentence_Similarity_Measures). These methods demonstrated poor results or were not evaluated in [Atoum](https://www.researchgate.net/publication/294873785_A_Comprehensive_Comparative_Study_of_Word_and_Sentence_Similarity_Measures), and some of the more attractive versions are not available for review.
 
 For these reasons, **focus will be on corpus-based methods.**
 
-#### Corpus-Based Document Similarity
+### Corpus-Based Document Similarity
 
 Corpus-based measures of document similarity rely on string similarity, string edit distance and word orders. Other common methods are the [edit-distance](https://en.wikipedia.org/wiki/Edit_distance) and [Smith-Waterman Alignment](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm).
 
@@ -119,13 +99,11 @@ The available data is subset by a time window to make computation feasible (year
 The period composing a corpus for FOMC data for this project is a year, so a corpus is comprised of 8 documents. The years studied in what follows are the years 2005, 2006 and 2007.
 
 
-# Question
+# Question: Is redundancy a useful tool for summarization?
 
-## Is redundancy a useful tool for summarization?
+Citizens should have transparency from their governments, but transparency is meaningless when its manifestation is in undigestable amounts of text. How can the information stored in these corpora be digested?
 
-Citizens should have transparency in government, but transparency is meaningless when its manifestation is only in undigestable amounts of text. How can the information stored in these corpora be summarized?
-
-This project explores the hypothesis that repetition conveys information about how an entity that produced a corpus operates (e.g. named entity relationships) and or conveys summary information.
+This project explores the hypothesis that repetition conveys information about how a government entity that produced a corpus operates (e.g. named entity relationships) and/or conveys summary information about the actions of the government entity.
 
 The field agrees that redundancy and similarity are theoretically valuable sources of information about a corpus:
 
@@ -166,25 +144,27 @@ To populate the `processed_documents` table, the following steps are taken:
    3. Stemmed using the PorterStemmer algorithm.
 5. Terms from all documents (e.g. sentences) are used to compoce a `TermVector` which is stored in the `corpii` table. Document term and tf-idf matrices are computed for the current corpus, and each document's respective vector in the tf-idf matrix is stored as it's `TfIdfVector` in the `processed_documents` table.
 
-Once all documents have been stored, similarity measures are calculated for pairs of documents. But more on this below, following a **Review of Current Methods**.
+Once all documents have been stored, similarity measures are calculated for pairs of documents. More on this below in **Methodologies.**
 
 \* *see [the gaceta codebase README](https://github.com/abarciauskas-bgse/gaceta/blob/master/README.md) for more details*
 
 
 # Methodologies
 
-Two methodologies were developed for this problem:
+Two methodologies were developed to address the question:
 
-1. The Needleman-Wunsch global sequence alignment algorithm
-2. Cosine similarity and clustering based on the tf-idf matrix of a document
+1. The Needleman-Wunsch Global Sequence Alignment Algorithm
+2. Cosine similarity and Min-k Cut Clustering
 
-### 1. The Needleman-Wunsch global sequence alignment algorithm
+## 1. The Needleman-Wunsch Global Sequence Alignment Algorithm
 
-The Needleman-Wunsch (NW) Algorithm surfaces the best global alignment between 2 sequences of text.  The Smith-Waterman (SW) alignment is a variation on Needleman-Wunsch which finds the best local alignment between 2 sequences of text. Both compute a scoring matrix in the same forward pass of the algorithm, with NW using negative values to indicate a gap penalty. SW does not include negative values, instead inserting 0's for gaps.
+The Needleman-Wunsch (NW) Algorithm surfaces the best global alignment between 2 sequences of text. The Smith-Waterman alignment was suggested by the literature, but the NW algorithm is a better tool for aligning sentences.
+
+The Smith-Waterman (SW) alignment is a variation on Needleman-Wunsch which finds the best local alignment between 2 sequences of text. Both compute a scoring matrix in the same forward pass of the algorithm, with NW using negative values to indicate a gap penalty. SW does not include negative values, instead inserting 0's for gaps.
 
 In the backward pass to find the best global or local alignment, NW starts from the terminal cell and finds the highest scoring alignment for the whole strings, whereas SW starts from the cell with the highest score and returns the equivalent of the longest common subsequences between the 2 strings.
 
-In the context of aligning sentences, it makes more sense to prefer global alignment over local alignment. Local alignment algorithms should be implemented when comparing larger units of text.
+In the context of aligning sentences, it makes more sense to prefer global alignment over local alignment. Local alignment algorithms are a better tool when comparing larger units of text.
 
 The Needleman-Wunsch algorithm has been implemented along with a `printAligment` function which returns an alignment pattern:
 
@@ -193,7 +173,7 @@ The Needleman-Wunsch algorithm has been implemented along with a `printAligment`
 [|, of, |, |, |, |, |, 2000, |, per, |, |, |, |, |, |, |, |, |, |, |, |, |, |, |, |, handball, per, ...]
 ```
 
-##### Implementation
+### Implementation
 
 The NW algorithm is implemented in the codebase [here](https://github.com/abarciauskas-bgse/gaceta/blob/master/src/com/gaceta/Alignment.java#L19-L58). Each score is stored in the `alignments` table along with the corresponding document ideas.
 
@@ -201,7 +181,9 @@ Below is the distribution of these scores for the FOMC corpus.
 
 ![hist](python_scripts/nw_distribution_fomc.png)
 
-##### Evaluation
+[Source code](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/NW%20distribution%20and%20exportation%20of%20tasks%20for%20Pybossa%20(FOMC).ipynb)
+
+### Evaluation
 
 The human intelligence platform [pybossa](http://pybossa.com/) is used to find a threshold qualifying 2 pairs of statements as redundant. Pybossa is a platform for crowdsourcing classification tasks which require human intelligence.
 
@@ -209,7 +191,7 @@ The project may be found here: [crowdcrafting.org/project/fomc/](crowdcrafting.o
 
 And it's corresponding codebases here: [github.com/abarciauskas-bgse/fomc_pybossa](https://github.com/abarciauskas-bgse/fomc_pybossa)
 
-Using human decisions on redundancy of pairs of sentences, a match is made with the similarity score determined by an algorithm. This will determine a threshold. Pairs of sentences with a score above this threshold will be classified as redundant.
+Using human decisions on redundancy of pairs of sentences, a match is made with the similarity score determined by an algorithm. This determined the threshold. Pairs of sentences with a score above this threshold will be classified as redundant.
 
 For the FOMC data, 6 persons were polled on 40 NW alignment scores selected from 0 to 4 deviations from the mean NW score. The following plots show the distributions of scores for those pairs of sentences marked redundant vs not redundant
 
@@ -218,7 +200,7 @@ For the FOMC data, 6 persons were polled on 40 NW alignment scores selected from
 
 It is fairly clear that redundant documents require an alignment score of at least 0.0.
 
-##### References
+**References**
 
 * [Needleman-Wunsch Algorithm (SlideShare)](http://www.slideshare.net/avrilcoghlan/the-needleman-wunsch-algorithm)
 * [Needleman-Wunsch Algorithm (Wikipedia)](https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm)
@@ -226,11 +208,11 @@ It is fairly clear that redundant documents require an alignment score of at lea
 * [Smith-Waterman Algorithm (Wikipedia)](https://en.wikipedia.org/wiki/Smith–Waterman_algorithm)
 * [What is the difference between local and global sequence alignments?](http://biology.stackexchange.com/questions/11263/what-is-the-difference-between-local-and-global-sequence-alignments)
 
-### 2. Cosine similarity and Min-k Cut Clustering
+## 2. Cosine similarity and Min-k Cut Clustering
 
 Cosine similarity captures the commonality in words amongst clusters of sentences, regardless of order. This is valuable in providing a more nuanced view when summarizing the contents of a whole corpus where we care about repetitive ideas and not just repetitive statements.
 
-##### Implementation
+### Implementation
 
 Cosine similarity is measured between each pair of tf-idf vectors within a corpus and stored in the `alignments` table.
 
@@ -238,9 +220,9 @@ The implementation of the cosine similarity measurement can be found in the code
 
 A graph of sentences is constructed from pairs of documents having a cosine similarity of at least 0.25. This threshold is chosen by inspection of the relationship between NW Scores and Cosine Similarities.
 
-Are there document pairs with low NW scores and high cosine similarity?
-
 ![hist](python_scripts/nw_scores_v_cosine_sims_fomc.png)
+
+[Source code](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/Compare%20NW%20Scores%20with%20Cosine%20Similarities%20(FOMC).ipynb)
 
 In the scatterplot above, there are many cosine similarities which correspond to extremely low NW scores. This suggests there may be some value to looking documents with similar words and not only similar sequences of words. There may be redundant concepts which are not captured in alignment scores.
 
@@ -250,7 +232,7 @@ Here is an example of a pair of documents' tagged lemmas having a cosine similar
 
 **Document 2:** estim, increas, in, hourli, compens, PER, quarter, had, been, revis, down, substanti, hourli, compens, wa, estim, to, have, declin, in, PER, quarter, follow, sharp, gain, record, in, first, quarter
  
-One can easily see this pair shares multiple words words but have a very low alignment score.
+One can easily see this pair shares multiple terms but have a very low alignment score.
 
 A fully connected graph is constructed from all pairs of documents having a cosine similarity of at least 0.25. Each pair of documents compose an edge in the graph and the set of vertices in the graph is the unique set of documents.
 
@@ -272,7 +254,7 @@ Given `k` is the number of supernodes allowed, one iteration of the Karger algor
 
 One iteration of the Karger algorithm finds a minimum cut with very low probability. Running the algorithm many times and keeping track of the minimum number of crossing edges finds the minimum cut with high probability.
 
-#### Minimum k-cut Approximation via Asymptotic Theory of Probabilities
+### Minimum k-cut Approximation
 
 The Karger algorithm randomly contracts edges creating supernodes until $k$ supernodes are left. The probability of finding the minimum cut on any one iteration is very low, but the probability given many iterations is very high. Asymptotically the probability of finding the minimum cut goes to 1.
 
@@ -284,13 +266,13 @@ Therefore, a probability of overall success of $\frac{1}{n}$ can be had by runni
 
 # Addressing the Question
 
-Can redundancies offer an opportunity for summarization? To address the question, each similarity measure is clustered and clusters analyzed.
+Can redundancies offer an opportunity for summarization? To address thhis question, each similarity measure was used to cluster sentences and these clusters are reported below.
 
 ## Clustering Using NW Score Threshold
 
 A NW score of 0.0 is found to be a reasonable threshold for pairs of redundant statements, based on human intelligence tasks as described in **Methodologies**. Restricting analysis only to sentence pairs above this threshold greatly reduces the size of alignments to analyze.
 
-Reducing the problem with this redundancy threshold is good because it creates small and self-contained clusters. However it most certainly omits a lot of information. For 2005 FOMC minutes data, there exists 523,776 pairs of sentences, however restricting the analysis to those sentences having a NW score greater than 0.0 leaves just 274 pairs.
+Reducing the problem with this redundancy threshold is good because it creates small and self-contained clusters (e.g. multiple fully-connected graphs with no shared edges). However it most certainly omits a lot of information. For 2005 FOMC minutes data, there exists 523,776 pairs of sentences, however restricting the analysis to those sentences having a NW score greater than 0.0 leaves just 274 pairs.
 
 To construct clusters of sentences, fully connected networks of sentences are constructed. A whole graph composed of all documents and alignments having NW scores greater than 0.0 is given to an algorithm to find fully connected sub graphs within it.
 
@@ -330,8 +312,9 @@ ____
 
 > In its accompanying statement, the Committee indicated that, with appropriate monetary policy action, the upside and downside risks to the attainment of both sustainable growth and price stability should be kept roughly equal.
 
-
 Not being an expert in FOMC proceedings, these look a good summary of  meetings: asessment of market conditions and implementation of monetary policy to maintain price stability through adjusments to the federal funds rate.
+
+Code used for this analysis may be found in the codebase [here](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/Redundancy%20Clusters%20(FOMC%2C%202005).ipynb).
 
 Please see **Appendix A** for results from 2006 and 2007.
 
@@ -341,7 +324,7 @@ Working with mini-batches of 500 document pairs having a cosine similarity of at
 
 In summary, the clusters detected appear to be more substantive and specific than what is picked up in the redundancies found by the NW sequence alignments.
 
-The results of the algorithm for the top 5 clusters found for 2007 FOMC minutes are listed below.
+The results of the algorithm for the top 5 clusters found for 2007 FOMC minutes are listed below. Relative frequency being 1 indicates this cluster included all instances fo the term amongst sentences in the original fully-connected graph. (There were values lower than 1 in the top 30 terms, it just happened the top 20 terms in these instances were entirely represented by the clusters found).
 
 \_\_\_\_
 
@@ -469,6 +452,8 @@ The results of the algorithm for the top 5 clusters found for 2007 FOMC minutes 
 | read        |                    1 |
 | coupl       |                    1 |
 
+Code used for this analysis may be found in the codebase [here](https://github.com/abarciauskas-bgse/gaceta/blob/master/python_scripts/Minimum%20k-Cut%20(FOMC%2C%202007).ipynb).
+
 Results for 2005 and 2006 are listed in **Appendix B**
 
 Running the algorithm on a larger dataset and larger specification for $k$ requried restricting the number of iterations to a value which would likely not have found the minimum cut and led most often to finding only 1 or 2 real clusters of nodes. (E.g. $k - 1$ remaining super nodes were composed of just the node itself plus one other node).
@@ -490,9 +475,9 @@ ____
 
 # Appendix
 
-### Appendix A: Representative statements of FOMC for 2006 and 2007
+## Appendix A: Representative statements of FOMC for 2006 and 2007
 
-##### Representatives of the top 7 most common statements for 2006:
+### Representatives of the top 7 most common statements for 2006:
 
 > Minutes of the Federal Open Market Committee A meeting of the Federal Open Market Committee is held in the offices of the Board of Governors of the Federal Reserve System in ishington, D.C., on Tuesday, January 31, 2006 at 9:00 a. m.
 
@@ -523,7 +508,7 @@ ____
 ____
 
 
-##### Representatives of the top 6 most common statements for 2007:
+### Representatives of the top 6 most common statements for 2007:
 
 > By unanimous vote, the Foreign Currency Directive is reaffirmed in the form 1.
 
@@ -548,9 +533,9 @@ ____
 > By notation vote completed on December 29, 2006, the Committee unanimously approved the minutes of the FOMC meeting held on December 12, 2006.
 
 
-### Appendix B: Results of Clustering Cosine Similarities for 2005 and 2006
+## Appendix B: Results of Clustering Cosine Similarities for 2005 and 2006
 
-#### 2005:
+### 2005
 
 \_\_\_\_
 
@@ -614,14 +599,14 @@ ____
 | non-energi   |                    1 |
 | basi         |                    1 |
 
-#### 2006:
+### 2006
 
 \_\_\_\_
 
 **Cluster 1**
 
 *Representative:*
-> In the Committee� s discussion of monetary policy for the intermeeting period, nearly all members favored keeping the target federal funds rate at 5-1/4 percent at this meeting.
+> In the Committee's discussion of monetary policy for the intermeeting period, nearly all members favored keeping the target federal funds rate at 5-1/4 percent at this meeting.
 
 | Top Terms   |   Relative Frequency |
 |:------------|---------------------:|
