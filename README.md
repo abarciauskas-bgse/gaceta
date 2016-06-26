@@ -23,10 +23,25 @@ This part is optional, as it requires a working java environment. To skip this s
 
 ### 1: Import data from sql dump (Option 2)
 
-Download sql dump file(s):
+Download sql dump file(s) from one of the following sources.
+
+**Google Drive:**
 
 * [gaceta_db.sqldump](https://drive.google.com/file/d/0B39HWOgUiKJraHFaenAwTVZ5RW8/view?usp=sharing)
-* [ADD ME fomc_db.sqldump]()
+* [fomc_db.sqldump](https://drive.google.com/file/d/0B39HWOgUiKJrbzRPTkxBUGFXYUU/view?usp=sharing)
+
+**Amazon S3:**
+
+* [gaceta_db.sqldump](https://s3-eu-west-1.amazonaws.com/abarciauskas-bgse/text_mining_data/gaceta_db.sqldump)
+* [fomc_db.sqldump](https://s3-eu-west-1.amazonaws.com/abarciauskas-bgse/text_mining_data/fomc_db.sqldump)
+
+Import into local postgres:
+
+```bash
+psql fomc < fomc_db.sqldump
+psql gaceta < gaceta_db.sqldump
+```
+
 
 ### 2: Analysis
 
