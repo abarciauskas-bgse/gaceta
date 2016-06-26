@@ -1,24 +1,38 @@
 # Redundancy in Barcelona's Municipal Gazette
 
-### Setup:
+## Running the code
 
-* Install freeling and its dependencies
-* Install postgres and create tables detailed in `schema.sql`
-* Download data from above sources to local directory (for me: `~/IdeaProjects/data/`)
+### Before you start:
 
-### Data extraction process was as follows:
+* Install postgres and create databases `gaceta` and `fomc` each having tables using `schema.sql`
 
-1. Copy data to directory (it is deleted during the database writing process so that we know which files have already been processed if process needs to be killed or dies)
+### 1: Manual data extraction (Option 1)
 
-```bash
-cp -r IdeaProjects/data/* IdeaProjects/temp_data
-```
+This part is optional, as it requires a working java environment. To skip this step move to **1: Import data from sql dump (Option 2)**
 
-2. Update the code base to use the local directory (in `Main.java`), `use_porter = true` if english (in `Corpus.java`), and stopwords file for either the FOMC or Gaceta data.
+1. Install freeling and its dependencies
+2. Download data from [fomc](http://stanford.edu/~rezab/useful/fomc_minutes.html) and store in a local directory (e.g.: `~/IdeaProjects/data/`). Data for the gaceta database is only available via BSC ftp server.
+2. Update the code base with the following respective of FOMC and Gaceta data sources:
+   1. to use the correct local directory (in `Main.java`),
+   2. `use_porter = true` if english (in `Corpus.java`),
+   3. and stopwords file for english or catalan (`empty.ca` and `empty.en` in `Corpus.java`).
 3. Select a subinterval (`YEAR` in `Main.java`) of time overwhich to conduct the analysis. For FOMC, a year is chosen, for Gaceta, a month-year pair was more reasonable.
 3. Run `writeDocuments` which stores sentences as documents in the database (see `schema.sql` for more information)
 4. Run `calcAndWriteAlignments` which calculates and stores Needleman-Wunsch sequence alignment scores
     * Calculating alignments for 1000 FOMC documents (e.g. 499500 alignments) took about 3 minutes, but this scales by a power so we would expect calculating alignments for 2000 documents to take 10 minutes (3**2).
+
+### 1: Import data from sql dump (Option 2)
+
+Download sql dump file(s):
+
+* [gaceta_db.sqldump](https://drive.google.com/file/d/0B39HWOgUiKJraHFaenAwTVZ5RW8/view?usp=sharing)
+* [ADD ME fomc_db.sqldump]()
+
+### 2: Analysis
+
+Once the database has been imported, analysis for each separate corpora can be found in `python_scripts`.
+
+Ensure to update the username when connecting to your database.
 
 
 ----
