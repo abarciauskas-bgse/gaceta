@@ -1,4 +1,7 @@
 .idea/
 .idea/*
 out/
-*.ipynb_checkpoints*
+*.ipynb_checkpoints
+.ipynb_checkpoints
+fomc_db.sqldump
+gaceta_db.sqldump
