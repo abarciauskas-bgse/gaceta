@@ -8,7 +8,7 @@ Aimee Barciauskas &nbsp; | &nbsp; aimee.barciauskas@barcelonagse.eu   &nbsp; | &
 
 # Abstract
 
-E-government initiatives offer unprecedented transparency into government proceedings. However, gaining understanding of a large corpus is often unmanageable for the average citizen. Furthermore, the use of "administrative jargon" is a barrier for the general public. Exploiting and exploring redundancy in these texts may facilitate summarization, insights and visualization.
+E-government initiatives offer unprecedented transparency into government proceedings. However, gaining understanding of a large corpus is often unmanageable for the average citizen. Further, heavy use of "administrative jargon" makes individual texts hard to digest. Exploiting and exploring redundancy in these texts may facilitate summarization, insights and visualization.
 
 
 
@@ -17,9 +17,9 @@ E-government initiatives offer unprecedented transparency into government procee
 
 ## Redundancy and Similarity
 
-Measures of similarity can be used to signal redundancy, where redundancy is considered a more strict definition of similarity. For example, "my dog ate my homework" and "my assignment is eaten by a canine" are both similar and redundant, whereas the former is completely similar to "My homework is to write about what my dog ate" in the intersection of words, but not redundant.
+Measures of similarity can be used to signal redundancy, where redundancy is considered a more strict definition of similarity. For example, "my dog ate my homework" and "my assignment was eaten by a canine" are both similar and redundant, whereas the former is completely similar to "My homework is to write about what my dog ate", in the intersection of words, but not redundant.
 
-Given the relationship between similarity and redundancy, similarity measures thresholded at some level signaling redundancy may be gleaned from human experts. The threshold for a similarity measure signaling redundancy is developed later in this paper.
+Given the relationship between similarity and redundancy, similarity measures thresholded at some level signaling redundancy may be determined by human experts. The threshold for a similarity measure signaling redundancy is developed later in this paper.
 
 ## Methodologies
 
@@ -27,7 +27,7 @@ This paper uses 2 methods to measure and analyze redundancy:
 
 **1. Needleman-Wunsch (NW) Sequence Alignments:**
 
-NW scores are calculated for pairs of sentences. Human intelligence is used to threshold a score signaling redundancy. Clusters are found in the distinctly connected sets of documents. In other words, these clusters are self-formed as no edges are shared across sentence clusters. Intuitively, this makes sense as one set of redundant statements is likely very different from another set redundant statements.
+NW scores are calculated for pairs of sentences. Human intelligence is used to threshold a score signaling redundancy. Clusters are found in the distinctly connected sets of documents. In other words, these clusters are self-formed and no edges are shared across sentence clusters. Intuitively, this makes sense as one set of redundant statements is likely very different from another set redundant statements.
 
 **2. Cosine Similarity-based Clustering**
 
@@ -41,20 +41,20 @@ The sources of data for this study were the Gaceta Municipal de Barcelona and FO
 
 For the duration of this paper, analysis is restricted to FOMC texts. The reason is straight-forward: analysis of results is impossible for a non-Catalan speaker. Results are for Gaceta are included in the code base, but analysis of them is awaiting a native Catalan speaker.
 
-The codebase for this project: [github.com/abarciauskas-bgse/gaceta](https://github.com/abarciauskas-bgse/gaceta). Python code used for analysis can be found in the [python_scripts/](https://github.com/abarciauskas-bgse/gaceta/tree/master/python_scripts) directory.
+The codebase for this project is available on github: [github.com/abarciauskas-bgse/gaceta](https://github.com/abarciauskas-bgse/gaceta). Python code used for analysis can be found in the [python_scripts/](https://github.com/abarciauskas-bgse/gaceta/tree/master/python_scripts) directory.
 
 
 # A Review of Current Methods
 
-To inform a specification of methods for analyzing redundancy for this project, a review of existing methods is conducted and is summarized below.
+To inform the specification of methods for analyzing redundancy for this project, a review of existing methods is conducted and is summarized below.
 
 ## Methods to Measure Similarity and Redundancy
 
 In the existing literature, measurements of similarity have been separated into **corpus-**, **knowledge-**, and **hybrid-based** methods. Hybrid methods are excluded from the current review.
 
-The practical difference between corpus and knowledge-based methods is the corpus based depends on word frequencies from a specific corpus. A restriction on corpus-based methods is they are quite domain-dependent and often do not generalize outside a given corpus. This could pose a potential problem for the current efforts if required to measure redundancy across e-government initiatives, but this is not a current requirement, so this limitation is acceptable.
+The practical difference between corpus and knowledge-based methods is corpus-based methods depend on word frequencies from a specific corpus. A restriction on corpus-based methods is they are quite domain-dependent and often do not generalize outside a given corpus. This could pose a potential problem for the current efforts if required to measure redundancy across e-government initiatives, but this is not a current requirement, so this limitation is acceptable.
 
-All methods listed below are included given their pertinence to the current problem.
+All methods described below are included given their pertinence to the current question.
 
 ### Corpus-Based Word Similarity
 
@@ -64,13 +64,13 @@ The bag-of-words (BOW) method is often used as a baseline measurement of similar
 
 ### Knowlege-Based Word Similarity
 
-WordNet bag-of-words (WBOW) is a "knowledge-based" version of Latent Semantic Analysis and is frequently used to enrich measurements of similarity in texts. WordNets are human-generated lexicons and thus do not require the pre-computation or corpus-dependency of LSA. WordNets are popular but may be limited in depth. It will be interesting to see what is available for Catalan.
+WordNet bag-of-words (WBOW) is a "knowledge-based" version of Latent Semantic Analysis and is frequently used to enrich measurements of similarity in texts. WordNets are human-generated lexicons and thus do not require the pre-computation or corpus-dependency of LSA. WordNets are popular but may be limited in depth.
 
 ### Knowledge-Based Document Similarity
 
 Knowledge-based document similarity measures listed in [Atoum](https://www.researchgate.net/publication/294873785_A_Comprehensive_Comparative_Study_of_Word_and_Sentence_Similarity_Measures) use a knowledge-based measurement of word similarity within a document and some quantification for document structure. For example, measurments composed of [WBOW plus part-of-speech (POS) tree kernels](http://ieeexplore.ieee.org/xpl/) or [POS tags](http://www.sciencedirect.com/science/article/pii/S0957417410011875?np=y). Others are listed in [Atoum Section 2.2.2](https://www.researchgate.net/publication/294873785_A_Comprehensive_Comparative_Study_of_Word_and_Sentence_Similarity_Measures). These methods demonstrated poor results or were not evaluated in [Atoum](https://www.researchgate.net/publication/294873785_A_Comprehensive_Comparative_Study_of_Word_and_Sentence_Similarity_Measures), and some of the more attractive versions are not available for review.
 
-For these reasons, **focus will be on corpus-based methods.**
+For these reasons, focus will be on **corpus-based methods.**
 
 ### Corpus-Based Document Similarity
 
@@ -80,7 +80,7 @@ In [Atoum](https://www.researchgate.net/publication/294873785_A_Comprehensive_Co
 
 Tree-based measurements leverage a tree data-structure representation of a document (i.e. sentence). In [Linguistic Redundancy in Twitter](http://www.aclweb.org/anthology/D11-1061.pdf) the most successful formulation is a combination metric using WBOW and the Syntatic First-Order Rule Content Model (FOR). The FOR feature space introduced by [Zanzotto and Moschitti](http://www.aclweb.org/anthology/P06-1051) constructs features as a pair of syntatic tree fragments augmented with variables which are evaluated for similarity.
 
-[Simfinder](http://www.mitpressjournals.org/doi/pdf/10.1162/089120105774321091) also uses sentence syntax trees to compte sentence similarity, without expectation on their complete alignment.
+[Simfinder](http://www.mitpressjournals.org/doi/pdf/10.1162/089120105774321091) also uses sentence syntax trees to compute sentence similarity, without expectation on their complete alignment.
 
 
 
@@ -101,7 +101,7 @@ The period composing a corpus for FOMC data for this project is a year, so a cor
 
 # Question: Is redundancy a useful tool for summarization?
 
-Citizens should have transparency from their governments, but transparency is meaningless when its manifestation is in undigestable amounts of text. How can the information stored in these corpora be digested?
+Citizens should have transparency from their governments, but transparency is meaningless when its manifestation is in undigestable amounts of text. How can the information stored in these corpora be made digestable?
 
 This project explores the hypothesis that repetition conveys information about how a government entity that produced a corpus operates (e.g. named entity relationships) and/or conveys summary information about the actions of the government entity.
 
@@ -115,15 +115,7 @@ ____
 
 ____
 
-> ...most applications based on Twitter share the goal of providing tweets that are both informative and diverse... to keep a high level of diversity, redundant tweets should be removed from the set of tweets displayed to the user ([Linguistic Redundancy in Twitter](http://www.aclweb.org/anthology/D11-1061.pdf)).
-
-____
-
 > ...from a computational linguistic point of view, the high redundancy in micro-blogs gives the unprecedented opportunity to study classical tasks ... on very large corpora characterized by an original and emerging linguistic style, pervaded with ungrammatical and colloquial expressions, abbreviations, and new linguistic forms  ([Linguistic Redundancy in Twitter](http://www.aclweb.org/anthology/D11-1061.pdf)).
-
-____
-
-> O'Shea et al. applied text similarity in Conversational Agents, which are computer programs that interact with humans through natural language dialogue ([Text Similarity using Google Tri-grams](https://web.cs.dal.ca/~eem/cvWeb/pubs/2012-Aminul-CAI.pdf)).
 
 
 
@@ -189,11 +181,11 @@ The human intelligence platform [pybossa](http://pybossa.com/) is used to find a
 
 The project may be found here: [crowdcrafting.org/project/fomc/](crowdcrafting.org/project/fomc/).
 
-And it's corresponding codebases here: [github.com/abarciauskas-bgse/fomc_pybossa](https://github.com/abarciauskas-bgse/fomc_pybossa)
+And it's corresponding codebase here: [github.com/abarciauskas-bgse/fomc_pybossa](https://github.com/abarciauskas-bgse/fomc_pybossa)
 
 Using human decisions on redundancy of pairs of sentences, a match is made with the similarity score determined by an algorithm. This determined the threshold. Pairs of sentences with a score above this threshold will be classified as redundant.
 
-For the FOMC data, 6 persons were polled on 40 NW alignment scores selected from 0 to 4 deviations from the mean NW score. The following plots show the distributions of scores for those pairs of sentences marked redundant vs not redundant
+For the FOMC data, 6 experts (students of economics) were polled on 40 NW alignment scores selected from 0 to 4 deviations from the mean NW score. The following plots show the distributions of scores for those pairs of sentences marked redundant vs not redundant
 
 ![hist](python_scripts/marked_redundant_hist_fomc.png)
 ![hist](python_scripts/marked_not_redundant_hist_fomc.png)
@@ -214,9 +206,7 @@ Cosine similarity captures the commonality in words amongst clusters of sentence
 
 ### Implementation
 
-Cosine similarity is measured between each pair of tf-idf vectors within a corpus and stored in the `alignments` table.
-
-The implementation of the cosine similarity measurement can be found in the codebase [here](https://github.com/abarciauskas-bgse/gaceta/blob/master/src/com/gaceta/Utils.java#L43-L53).
+Cosine similarity is measured between each pair of tf-idf vectors within a corpus and stored in the `alignments` table. ([Source code](https://github.com/abarciauskas-bgse/gaceta/blob/master/src/com/gaceta/Utils.java#L43-L53).)
 
 A graph of sentences is constructed from pairs of documents having a cosine similarity of at least 0.25. This threshold is chosen by inspection of the relationship between NW Scores and Cosine Similarities.
 
@@ -244,13 +234,13 @@ The minimum k-cut Karger approximation algorithm clusters highly-connected sub-g
 
 The Karger algorithm randomly contracts edges creating supernodes until k supernodes are left. The probability of finding the minimum cut on any one iteration is very low, but the probability given many iterations is high. More detail on this is provided below.
 
-Given `k` is the number of supernodes allowed, one iteration of the Karger algorithm is:
+Given $k$ is the number of supernodes of interest (equivalent to the number of clusters of interst), one iteration of the Karger algorithm is:
 
-**While the number of vertices in the graph is > k:**
+**While the number of vertices in the graph is > $k$:**
 
-1. Pick an edge at random: the first vertex (`v1`) absorbs the second vertex (`v2`).
-2. All vertices adjacent to `v2` become adjacent to v1 unless already present.
-3. All edges referencing `v2` are updated to point to `v1`, unless the other vertex of the edge is itself `v1`. In the latter case, the edge is deleted (e.g. remove self-loops).
+1. Pick an edge at random: the first vertex ($v1$) absorbs the second vertex ($v2$).
+2. All vertices adjacent to $v2$ become adjacent to v1 unless already present.
+3. All edges referencing $v2$ are updated to point to $v1$, unless the other vertex of the edge is itself $v1$. In the latter case, the edge is deleted (e.g. remove self-loops).
 
 One iteration of the Karger algorithm finds a minimum cut with very low probability. Running the algorithm many times and keeping track of the minimum number of crossing edges finds the minimum cut with high probability.
 
@@ -260,15 +250,15 @@ One iteration of the Karger algorithm finds a minimum cut with very low probabil
 
 The Karger algorithm randomly contracts edges creating supernodes until $k$ supernodes are left. The probability of finding the minimum cut on any one iteration is very low, but the probability given many iterations is very high. Asymptotically the probability of finding the minimum cut goes to 1.
 
-If $F$ is the set of edges crossing the minimum cut and $S_i$ is the event that an edge in $F$ is contracted in iteration $i$, the probability an edge in $F$ is contracted in any iteration is $\frac{k}{m}$ where $k$ is the number of crossing edges in the minimum cut and $m$ is the number of edges.	The probability an edge in $F$ is contracted in any iteration is $\geq \frac{1}{n^{2}}$. This is not a good probability of success, however running many iterations and keeping track of the minimum so far increases the probability of success overall. The probability of success in one iteration is low but not trivial.
+If $F$ is the set of edges crossing the minimum cut and $S_i$ is the event that an edge in $F$ is contracted in iteration $i$, the probability an edge in $F$ is contracted in any iteration is $\frac{k}{m}$ where $k$ is the number of crossing edges in the minimum cut and $m$ is the number of edges.  The probability an edge in $F$ is contracted in any iteration is $\geq \frac{1}{n^{2}}$. This is not a good probability of success, however running many iterations and keeping track of the minimum so far increases the probability of success overall. The probability of success in one iteration is low but not trivial.
 
-**How many trials are needed?** Define $T_{i}$ as the event that the minimum cut is found in the $i$-th iteration and $N$ as the total number of Karger iterations. The probability all trials fail is product of all $T_{i}$ probabilities, which is $\leq (1 - \frac{1}{n^{2}})^{N}$.
+**How many trials are needed?** Defining $T_{i}$ as the event that the minimum cut is found in the $i$-th iteration and $N$ as the total number of Karger iterations, the probability all trials fail is product of all $T_{i}$ probabilities, which is $\leq (1 - \frac{1}{n^{2}})^{N}$.
 
 Therefore, a probability of overall success of $\frac{1}{n}$ can be had by running the algorithm $n^{2}ln(n)$. This is the number of iterations run in experiments described in **Addressing the Question**.
 
 # Addressing the Question
 
-Can redundancies offer an opportunity for summarization? To address thhis question, each similarity measure was used to cluster sentences and these clusters are reported below.
+Can redundancies offer an opportunity for summarization? To address this question, each similarity measure was used to cluster sentences and these clusters are reported below.
 
 ## Clustering Using NW Score Threshold
 
