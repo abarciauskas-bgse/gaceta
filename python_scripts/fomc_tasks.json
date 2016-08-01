@@ -1,322 +1,322 @@
 [
     {
-        "doc2id": 846, 
-        "doc2": "Although auto sales were weak in July, real outlays for other goods rose briskly.", 
-        "doc1": "Participants emphasized that any such move would need to be consistent with the Committee's statutory objectives for promoting maximum employment as well as price stability.", 
+        "doc2id": 2081, 
+        "doc2": "Return to text Last update: November 15, 2006, 2:00 PM_Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, December 12, 2006 at 8:30 a. m.", 
+        "doc1": "Return to text Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Wednesday, May 10, 2006 at 8:30 a. m.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 364, 
-        "nw_score": -14
+        "doc1id": 1362, 
+        "nw_score": 23
     }, 
     {
-        "doc2id": 515, 
-        "doc2": "The_Committee agreed that the statement should continue to note that their predominant policy concern was the risk that inflation would fail to moderate as expected, and that future policy adjustments would depend on the evolution of the outlook for both inflation and economic growth.", 
-        "doc1": "Secretarys note: Advice subsequently was received that the selection of Mr._Dudley as Manager was satisfactory to the board of directors of the Federal_Reserve_Bank of New_York.", 
+        "doc2id": 1924, 
+        "doc2": "Last update: October 11, 2006, 2:00 PM_Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, October 24, 2006 at 2:00 p. m. and continued on Wednesday, October 25, 2006 at 9:00 a. m.", 
+        "doc1": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Wednesday, June 28, 2006 at 2:00 p. m. and continued on Thursday, June 29, 2006 at 9:00 a. m.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 8, 
-        "nw_score": -20
-    }, 
-    {
-        "doc2id": 1359, 
-        "doc2": "However, consumer confidence recently had dropped by a sizable amount, leading some participants to voice concerns that household spending might increase less than currently anticipated.", 
-        "doc1": "Bank loans outstanding also continued to rise rapidly.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 1313, 
-        "nw_score": -15
-    }, 
-    {
-        "doc2id": 154, 
-        "doc2": "Thereafter, growth was likely to return to around its trend rate, which several participants viewed as likely to be higher than the staffs estimate.", 
-        "doc1": "The_Committee thought that the statement should reiterate the view that the adjustment in the housing market was ongoing, but that nevertheless the economy seemed likely to expand at a moderate pace over coming quarters.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 513, 
-        "nw_score": -17
-    }, 
-    {
-        "doc2id": 8, 
-        "doc2": "Secretarys note: Advice subsequently was received that the selection of Mr._Dudley as Manager was satisfactory to the board of directors of the Federal_Reserve_Bank of New_York.", 
-        "doc1": "Exports of capital goods contracted slightly, led by a drop in aircraft exports.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 1066, 
-        "nw_score": -17
-    }, 
-    {
-        "doc2id": 846, 
-        "doc2": "Although auto sales were weak in July, real outlays for other goods rose briskly.", 
-        "doc1": "By unanimous vote, the Federal_Reserve_Bank of New_York was selected to execute transactions for the System_Open_Market_Account.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 6, 
-        "nw_score": -9
-    }, 
-    {
-        "doc2id": 1181, 
-        "doc2": "While the Committee saw uncertainty regarding the economic outlook as still elevated, it judged that, after this action, the upside risks to inflation roughly balanced the downside risks to growth.", 
-        "doc1": "In particular, participants took note of the upturn in orders and shipments of capital goods, and of more upbeat surveys of business conditions.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 480, 
-        "nw_score": -17
-    }, 
-    {
-        "doc2id": 1227, 
-        "doc2": "Production in high-tech industries, however, increased modestly, and commercial aircraft production registered another solid gain.", 
-        "doc1": "The_Manager also reported on developments in domestic financial markets and on System open market operations in government securities and federal agency obligations during the period since the previous meeting.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 1021, 
-        "nw_score": -17
-    }, 
-    {
-        "doc2id": 148, 
-        "doc2": "Against this background and with the rate of increase of shelter prices slowing down, the staff expected core inflation to edge down in 2007 and 2008.", 
-        "doc1": "Recent data indicated that economic activity in emerging-market economies remained generally strong.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 724, 
-        "nw_score": -20
-    }, 
-    {
-        "doc2id": 1365, 
-        "doc2": "Similarly, business sentiment had deteriorated in many parts of the country, but in other areas firms remained cautiously optimistic.", 
-        "doc1": "Inventories of light motor vehicles rose again in July and August.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 869, 
-        "nw_score": -11
-    }, 
-    {
-        "doc2id": 204, 
-        "doc2": "Recent developments were seen as supporting the Committees view that maintaining the current target was likely to foster moderate economic growth and to further the gradual reduction of core inflation from its elevated level over the past year.", 
-        "doc1": "Recent developments were seen as supporting the Committee's view that maintaining the current target was likely to foster moderate economic growth and to further the gradual reduction of core inflation from its elevated level.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 351, 
-        "nw_score": 22
-    }, 
-    {
-        "doc2id": 1, 
-        "doc2": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, January 30, 2007 at 2:00 p. m., and continued on Wednesday, January 31, 2007 at 9:00 a. m.", 
-        "doc1": "Banking Information & Regulation_Minutes of the Federal_Open_Market_Committee | Summary of Economic_Projections_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, October 30, 2007 at 2:00 p. m. and continued on Wednesday, October 31, 2007 at 9:00 a. m.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 1016, 
-        "nw_score": 29
-    }, 
-    {
-        "doc2id": 58, 
-        "doc2": "The_Manager shall clear with the Committee (or with the Subcommittee, if the Subcommittee believes that consultation with the full Committee is not feasible in the time available, or with the Chairman, if the Chairman believes that consultation with the Subcommittee is not feasible in the time available): A._Any operation that would result in a change in the Systems overall open position in foreign currencies exceeding $1.5 billion since the most recent regular meeting of the Committee.", 
-        "doc1": "The_Manager shall clear with the Subcommittee (or with the Chairman, if the Chairman believes that consultation with the Subcommittee is not feasible in the time available): A._Any operation that would result in a change in the Systems overall open position in foreign currencies exceeding $300 million on any day or $600 million since the most recent regular meeting of the Committee.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 54, 
-        "nw_score": 19
-    }, 
-    {
-        "doc2id": 1211, 
-        "doc2": "With_Mr._Poole dissenting, the Committee voted to direct the Federal_Reserve_Bank of New_York to establish and maintain a reciprocal currency (swap) arrangement for the System_Open_Market_Account with the Swiss_National_Bank in an amount not to exceed $4 billion.", 
-        "doc1": "At the conclusion of the discussion, with Mr._Poole dissenting, the Committee voted to direct the Federal_Reserve_Bank of New_York to establish and maintain a reciprocal currency (swap) arrangement for the System_Open_Market_Account with the European_Central_Bank in an amount not to exceed $20 billion.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 1410, 
-        "nw_score": 20
-    }, 
-    {
-        "doc2id": 1205, 
-        "doc2": "Banking Information & Regulation_Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, December 11, 2007, at 8:00 a. m.", 
-        "doc1": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, September 18, 2007 at 8:30 a. m.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 822, 
-        "nw_score": 22
-    }, 
-    {
-        "doc2id": 1186, 
-        "doc2": "Today's action, combined with the policy action taken in September, should help forestall some of the adverse effects on the broader economy that might otherwise arise from the disruptions in financial markets and promote moderate growth over time.", 
-        "doc1": "The_Committee indicated that its action, combined with the policy action taken in September, should help forestall some of the adverse effects on the broader economy that might otherwise arise from the disruptions in financial markets and should promote moderate growth over time.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 1288, 
+        "doc1id": 1521, 
         "nw_score": 28
     }, 
     {
-        "doc2id": 616, 
-        "doc2": "These rates of growth were associated with civilian unemployment rates in the range of 4-1/2 to 4-3/4 percent in the fourth quarter of 2007 and 4-1/2 to 5 percent in the fourth quarter of 2008; the central tendency of these projections was 4-1/2 to 4-3/4 percent in 2007 and about 4-3/4 percent in 2008.", 
-        "doc1": "These rates of growth were associated with a civilian unemployment rate in the range of 4-1/2 to 4-3/4 percent in the fourth quarter of 2007 and 4-1/2 to 5 percent in the fourth quarter of 2008; the central tendency of these projections was 4-1/2 to 4-3/4 percent for both years.", 
+        "doc2id": 508, 
+        "doc2": "In preparation for the Federal_Reserves semiannual report to the Congress on monetary policy, the members of the Board of Governors and the presidents of the Federal_Reserve_Banks submitted individual projections of the growth of GDP, the rate of unemployment, and core consumer price inflation for 2005 and 2006.", 
+        "doc1": "In preparation for the Federal_Reserve\ufffd s semi-annual report to the Congress on the economy and monetary policy, the members of the Board of Governors and the presidents of the Federal_Reserve_Banks submitted individual projections of the growth of GDP, the rate of unemployment, and core consumer price inflation for the years 2005 and 2006.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 161, 
-        "nw_score": 31
+        "doc1id": 117, 
+        "nw_score": 30
     }, 
     {
-        "doc2id": 160, 
-        "doc2": "Projections of the rate of expansion in real GDP for 2007 were in the 2-1/4 to 3-1/4 percent range, with a central tendency of 2-1/2 to 3 percent; for 2008 the forecasts were in the slightly higher range of 2-1/2 to 3-1/4 percent, with a central tendency of 2-3/4 to 3 percent.", 
-        "doc1": "Projections for the rate of expansion in real GDP in 2007 were in a range from 2 to 2-3/4 percent in 2007, with a central tendency of 2-1/4 to 2-1/2 percent; for 2008, the projections ranged between 2-1/2 to 3 percent, with a central tendency of 2-1/2 to 2-3/4 percent.", 
+        "doc2id": 1603, 
+        "doc2": "In preparation for the Federal_Reserves semiannual report to the Congress on monetary policy, the members of the Board of Governors and the presidents of the Reserve_Banks submitted individual projections of the growth of GDP, the rate of unemployment, and core consumer price inflation for 2006 and 2007, conditioned on the participants views of the appropriate path for monetary policy.", 
+        "doc1": "In preparation for the Federal_Reserves semiannual report to the Congress on the economy and monetary policy, the members of the Board of Governors and the presidents of the Federal_Reserve_Banks submitted individual projections of the growth of GDP, the rate of unemployment, and core consumer price inflation for the years 2006 and 2007.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 615, 
+        "doc1id": 1169, 
+        "nw_score": 23
+    }, 
+    {
+        "doc2id": 971, 
+        "doc2": "In these circumstances, the Committee believed that policy accommodation could be removed at a pace that was likely to be measured but noted that it would respond to changes in economic prospects as needed to fulfill its obligation to maintain price stability.", 
+        "doc1": "In these circumstances, the Committee believed that policy accommodation could be removed at a pace that would likely be measured but noted that it would respond to changes in economic prospects as needed to fulfill its obligation to maintain price stability.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 853, 
+        "nw_score": 28
+    }, 
+    {
+        "doc2id": 2836, 
+        "doc2": "Projections for the rate of expansion in real GDP in 2007 were in a range from 2 to 2-3/4 percent in 2007, with a central tendency of 2-1/4 to 2-1/2 percent; for 2008, the projections ranged between 2-1/2 to 3 percent, with a central tendency of 2-1/2 to 2-3/4 percent.", 
+        "doc1": "Projections of the rate of expansion in real GDP for 2007 were in the 2-1/4 to 3-1/4 percent range, with a central tendency of 2-1/2 to 3 percent; for 2008 the forecasts were in the slightly higher range of 2-1/2 to 3-1/4 percent, with a central tendency of 2-3/4 to 3 percent.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 2381, 
+        "nw_score": 23
+    }, 
+    {
+        "doc2id": 3509, 
+        "doc2": "The_Committee indicated that its action, combined with the policy action taken in September, should help forestall some of the adverse effects on the broader economy that might otherwise arise from the disruptions in financial markets and should promote moderate growth over time.", 
+        "doc1": "Today\ufffd s action, combined with the policy action taken in September, should help forestall some of the adverse effects on the broader economy that might otherwise arise from the disruptions in financial markets and promote moderate growth over time.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 3407, 
+        "nw_score": 28
+    }, 
+    {
+        "doc2id": 660, 
+        "doc2": "In the Committees discussion of monetary policy for the intermeeting period, all of the members favored raising the target federal funds rate by 25 basis points to 3\ufffd percent at this meeting.", 
+        "doc1": "In the Committees discussion of monetary policy for the intermeeting period, all members favored raising the target federal funds rate 25 basis points to 3 percent at this meeting.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 415, 
         "nw_score": 21
     }, 
     {
-        "doc2id": 1, 
-        "doc2": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, January 30, 2007 at 2:00 p. m., and continued on Wednesday, January 31, 2007 at 9:00 a. m.", 
-        "doc1": "Last update: February 21, 2007, 2:00 PM_Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, March 20, 2007 at 2:30 p. m., and continued on Wednesday, March 21, 2007 at 9:00 a. m.", 
+        "doc2id": 1710, 
+        "doc2": "Investors anticipated the FOMCs decision at its June meeting to raise the federal funds rate 25 basis points, but near-term policy expectations edged lower, apparently in response to the accompanying statement.", 
+        "doc1": "Investors anticipated the FOMCs decision at its May meeting to raise the federal funds rate target 25 basis points, but near-term policy expectations edged up, apparently in response to the accompanying statement.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 222, 
-        "nw_score": 28
-    }, 
-    {
-        "doc2id": 1205, 
-        "doc2": "Banking Information & Regulation_Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, December 11, 2007, at 8:00 a. m.", 
-        "doc1": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Wednesday, May 9, 2007 at 8:30 a. m.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 371, 
+        "doc1id": 1582, 
         "nw_score": 22
     }, 
     {
-        "doc2id": 259, 
-        "doc2": "Investment in goods and services other than transportation and high-tech equipment softened more than fundamentals had suggested.", 
-        "doc1": "Conditions in corporate credit markets were mixed.", 
+        "doc2id": 3237, 
+        "doc2": "BankingInformation& amp; Regulation_Minutes of the Federal_Open_Market_Committee| Summary of Economic_Projections_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, October 30, 2007 at 2:00 p. m. and continued on Wednesday, October 31, 2007 at 9:00 a. m.", 
+        "doc1": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, January 30, 2007 at 2:00 p. m., and continued on Wednesday, January 31, 2007 at 9:00 a. m.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 929, 
-        "nw_score": -7
+        "doc1id": 2222, 
+        "nw_score": 29
     }, 
     {
-        "doc2id": 448, 
-        "doc2": "Over the intermeeting period, yields on nominal Treasury securities edged up at all maturities.", 
-        "doc1": "Future policy adjustments would depend on the outlook for both inflation and economic growth, as implied by incoming information.", 
+        "doc2id": 2352, 
+        "doc2": "As a result, the expected path of the federal funds rate beyond the near term edged down.", 
+        "doc1": "In contrast, unseasonably warm weather caused a sharp cutback in the output of utilities in December.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 906, 
-        "nw_score": -8
+        "doc1id": 2301, 
+        "nw_score": -12
     }, 
     {
-        "doc2id": 924, 
-        "doc2": "As a result, asset-backed commercial paper outstanding contracted substantially.", 
-        "doc1": "The determinants of household spending were broadly supportive.", 
+        "doc2id": 4578, 
+        "doc2": "Although starts of single-family homes slowed to well below the level of preceding months, multifamily starts rose and sales of both existing and new homes were elevated.", 
+        "doc1": "The labor market was projected to show steady improvement through the end of 2004, but the forecasted pace of hiring was expected to slow a little next year as economic growth moderated.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 534, 
-        "nw_score": -6
+        "doc1id": 4059, 
+        "nw_score": -22
     }, 
     {
-        "doc2id": 132, 
-        "doc2": "The subsequent release of the minutes from the meeting elicited little market reaction.", 
-        "doc1": "Net exports were unexpectedly strong in the fourth quarter.", 
+        "doc2id": 4002, 
+        "doc2": "Production of other business equipment also increased markedly, and indexes for business and construction supplies were up notably.", 
+        "doc1": "Accordingly, all of these instruments remained in effect in their existing form.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 182, 
-        "nw_score": -7
+        "doc1id": 3684, 
+        "nw_score": -10
     }, 
     {
-        "doc2id": 214, 
-        "doc2": "The_Committee then moved on to a discussion of the role of economic projections in policy communications.", 
-        "doc1": "The_Manager of the System_Open_Market_Account (SOMA) reported on recent developments in foreign exchange markets.", 
+        "doc2id": 1828, 
+        "doc2": "Exports of capital goods and industrial supplies declined after considerable gains in June, but exports of telecommunications equipment and automotive products were strong.", 
+        "doc1": "Industrial production picked up in February after a modest decline in January.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 826, 
-        "nw_score": -8
+        "doc1id": 1226, 
+        "nw_score": -12
     }, 
     {
-        "doc2id": 590, 
-        "doc2": "In contrast, spreads on speculative-grade corporate bonds narrowed.", 
-        "doc1": "The_Manager of the System_Open_Market_Account reported on recent developments in foreign exchange markets.", 
+        "doc2id": 2645, 
+        "doc2": "Canadas growth seemed to have rebounded from a disappointing fourth quarter.", 
+        "doc1": "However, given the surge in stock prices in April, much of the lost ground had probably since been made up.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 674, 
-        "nw_score": -6
+        "doc1id": 2622, 
+        "nw_score": -13
     }, 
     {
-        "doc2id": 111, 
-        "doc2": "Output growth in Canada seemed to have firmed but likely remained below trend.", 
-        "doc1": "By unanimous vote, the Authorization for Foreign_Currency_Operations was reaffirmed in the form shown below: AUTHORIZATION_FOR_FOREIGN_CURRENCY_OPERATIONS 1.", 
+        "doc2id": 2184, 
+        "doc2": "Recent data suggested that aggregate demand in the rest of the world was likely to continue to expand at a somewhat faster rate than in the United_States.", 
+        "doc1": "Warm weather boosted housing construction in January and February, although sales of new homes dropped back and house prices decelerated slightly.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 21, 
-        "nw_score": -8
+        "doc1id": 1216, 
+        "nw_score": -18
     }, 
     {
-        "doc2id": 190, 
-        "doc2": "However, the recent declines in energy prices were likely to restrain energy extraction as well as activity in associated energy-producing sectors.", 
-        "doc1": "Growth in consumer spending would likely continue to be supported by gains in employment and incomes.", 
+        "doc2id": 4166, 
+        "doc2": "Growth in real consumer spending appeared to have slowed somewhat in recent months from its first-quarter pace.", 
+        "doc1": "Real imports, however, also appeared likely to continue rising strongly as domestic demand climbed further, leading to a widening of already substantial trade and current account deficits.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 330, 
-        "nw_score": -8
+        "doc1id": 4103, 
+        "nw_score": -17
     }, 
     {
-        "doc2id": 62, 
-        "doc2": "There were no open market operations in foreign currencies for the Systems account in the period since the previous meeting.", 
-        "doc1": "Retailers reported weaker results in many regions of the country, but in some, retailers saw solid growth.", 
+        "doc2id": 136, 
+        "doc2": "A number of participants noted continued modest gains in employment, though some commented that, based on anecdotal information, job growth seemed to have picked up of late.", 
+        "doc1": "Risk spreads on corporate bonds were stable at relatively low levels, consistent with favorable indicators of corporate credit quality.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 1357, 
-        "nw_score": -8
+        "doc1id": 100, 
+        "nw_score": -21
     }, 
     {
-        "doc2id": 272, 
-        "doc2": "The pace of economic expansion in the euro area picked up as investment and exports rose.", 
-        "doc1": "Retailers reported weaker results in many regions of the country, but in some, retailers saw solid growth.", 
+        "doc2id": 2474, 
+        "doc2": "Sales of both new and existing single-family homes in recent months were, on balance, in line with the pace seen since mid-2006.", 
+        "doc1": "Further advances in nonresidential investment were likely.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 1357, 
-        "nw_score": -8
+        "doc1id": 2398, 
+        "nw_score": -11
     }, 
     {
-        "doc2id": 598, 
-        "doc2": "Consumer credit continued to expand at a moderate pace in the first quarter.", 
-        "doc1": "Consumer credit continued to expand at a moderate pace early in the year.", 
+        "doc2id": 4167, 
+        "doc2": "Although outlays for motor vehicles in May more than retraced their April decline and purchases of services advanced at an appreciable rate, spending on nondurable goods remained sluggish.", 
+        "doc1": "Market participants attributed the dollars overall gains particularly to the stronger-than-expected U.S. economic data and the weaker-than-expected performance of the Canadian economy and economies in the euro area.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 457, 
-        "nw_score": 7
+        "doc1id": 4053, 
+        "nw_score": -20
     }, 
     {
-        "doc2id": 899, 
-        "doc2": "At its August meeting, the FOMC decided to maintain its target for the federal funds rate at 5-1/4 percent.", 
-        "doc1": "At its January meeting, the Federal_Open_Market_Committee maintained its target for the federal funds rate at 5-1/4 percent.", 
+        "doc2id": 1587, 
+        "doc2": "Spreads of yields on corporate bonds over those on comparable-maturity Treasury securities widened somewhat, while those on speculative-grade issues rose by more.", 
+        "doc1": "Spreads of yields on investment-grade bonds over those on comparable-maturity Treasury securities were about unchanged, while those on speculative-grade bonds declined.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 285, 
-        "nw_score": 7
-    }, 
-    {
-        "doc2id": 509, 
-        "doc2": "Recent developments were seen as supporting the Committees view that maintaining the current target rate was likely to foster moderate economic growth and a gradual ebbing in core inflation.", 
-        "doc1": "Recent developments were seen as supporting the Committee's view that maintaining the current target was likely to foster moderate economic growth and to further the gradual reduction of core inflation from its elevated level.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 351, 
-        "nw_score": 10
-    }, 
-    {
-        "doc2id": 614, 
-        "doc2": "The projections for the growth of nominal GDP were in the range of 4-1/2 to 5-1/2 percent, with a central tendency of 4-1/2 to 5 percent for 2007; for 2008, the projections for nominal GDP growth ranged between 4-1/2 to 5-1/2 with a central tendency of 4-3/4 to 5 percent.", 
-        "doc1": "Projections for the rate of expansion in real GDP in 2007 were in a range from 2 to 2-3/4 percent in 2007, with a central tendency of 2-1/4 to 2-1/2 percent; for 2008, the projections ranged between 2-1/2 to 3 percent, with a central tendency of 2-1/2 to 2-3/4 percent.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 615, 
-        "nw_score": 18
-    }, 
-    {
-        "doc2id": 350, 
-        "doc2": "In the Committee's discussion of monetary policy for the period between its March and May meetings, all members favored keeping the target federal funds rate at 5-1/4 percent.", 
-        "doc1": "In the Committees discussion of monetary policy for the intermeeting period, all members favored keeping the target federal funds rate at 5-1/4 percent.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 508, 
-        "nw_score": 10
-    }, 
-    {
-        "doc2id": 677, 
-        "doc2": "By unanimous vote, the Committee ratified these transactions.", 
-        "doc1": "By unanimous vote, the Committee ratified these transactions.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 228, 
-        "nw_score": 5
-    }, 
-    {
-        "doc2id": 582, 
-        "doc2": "Future policy adjustments would depend on the evolution of the outlook for both inflation and economic growth, as implied by incoming information.", 
-        "doc1": "Future policy adjustments will depend on the outlook for both inflation and economic growth, as implied by Votes for this action: Messrs.", 
-        "question": "Are these sentences redundant?", 
-        "doc1id": 820, 
+        "doc1id": 1442, 
         "nw_score": 6
     }, 
     {
-        "doc2id": 373, 
-        "doc2": "There were no open market operations in foreign currencies for the Systems account in the period since the previous meeting.", 
-        "doc1": "There were no open market operations in foreign currencies for the System's account in the period since the previous meeting.", 
+        "doc2id": 1924, 
+        "doc2": "Last update: October 11, 2006, 2:00 PM_Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, October 24, 2006 at 2:00 p. m. and continued on Wednesday, October 25, 2006 at 9:00 a. m.", 
+        "doc1": "Return to text Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Wednesday, May 10, 2006 at 8:30 a. m.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 226, 
+        "doc1id": 1362, 
         "nw_score": 12
     }, 
     {
-        "doc2id": 375, 
-        "doc2": "By unanimous vote, the Committee ratified these transactions.", 
+        "doc2id": 723, 
+        "doc2": "Spreads on investment-grade corporate bonds were little changed over the intermeeting period, but those on speculative-grade bonds increased from very low levels.", 
+        "doc1": "Spreads on investment-grade corporate bonds were little changed over the intermeeting period, but spreads on speculative-grade bonds contracted notably.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 488, 
+        "nw_score": 9
+    }, 
+    {
+        "doc2id": 919, 
+        "doc2": "Last update: November 22, 2005, 2:00 PM_Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, December 13, 2005 at 9:00 Ms._Cumming, Messrs.", 
+        "doc1": "Minutes of the Federal_Open_Market_Committee_February 1-2, 2005 A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, February 1, 2005, at 1:30 p. m. and continued on Wednesday, February 2, 2005, at 9:00 a. m.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 1, 
+        "nw_score": 12
+    }, 
+    {
+        "doc2id": 2571, 
+        "doc2": "In the Committee\ufffd s discussion of monetary policy for the period between its March and May meetings, all members favored keeping the target federal funds rate at 5-1/4 percent.", 
+        "doc1": "In the Committees discussion of monetary policy for the intermeeting period, all members favored keeping the target federal funds rate at 5-1/4 percent at this meeting.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 2423, 
+        "nw_score": 8
+    }, 
+    {
+        "doc2id": 2063, 
+        "doc2": "In the Committees discussion of monetary policy for the intermeeting period, nearly all members favored keeping the target federal funds rate at 5-1/4 percent at this meeting.", 
+        "doc1": "In the Committees discussion of monetary policy for the intermeeting period, all members favored raising the target federal funds rate 25 basis points to 4-1/2 percent at this meeting.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 1199, 
+        "nw_score": 11
+    }, 
+    {
+        "doc2id": 5264, 
+        "doc2": "In the Committees discussion of policy for the intermeeting period ahead, all the members favored an unchanged policy that continued to incorporate a target of 1 percent for the federal funds rate.", 
+        "doc1": "In the Committees discussion of policy for the intermeeting period ahead, all the members agreed that an unchanged target of 1 percent remained appropriate for the federal funds rate.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 5148, 
+        "nw_score": 9
+    }, 
+    {
+        "doc2id": 2892, 
+        "doc2": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday_August 7, 2007 at 8:30 a. m.", 
+        "doc1": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, January 30, 2007 at 2:00 p. m., and continued on Wednesday, January 31, 2007 at 9:00 a. m.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 2222, 
+        "nw_score": 14
+    }, 
+    {
+        "doc2id": 3624, 
+        "doc2": "Notation_VoteBy notation vote completed on November 19, 2007, the Committee unanimously approved the minutes of the FOMC meeting held on October 30-31, 2007.", 
+        "doc1": "Notation_Vote_By notation vote completed on October 5, 2007, the Committee unanimously approved the minutes of the FOMC meeting held on September 18, 2007 and of the conference calls on August 10, 2007 and August 16, 2007.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 3425, 
+        "nw_score": 9
+    }, 
+    {
+        "doc2id": 1924, 
+        "doc2": "Last update: October 11, 2006, 2:00 PM_Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, October 24, 2006 at 2:00 p. m. and continued on Wednesday, October 25, 2006 at 9:00 a. m.", 
+        "doc1": "Minutes of the Federal_Open_Market_Committee_A meeting of the Federal_Open_Market_Committee was held in the offices of the Board of Governors of the Federal_Reserve_System in Washington, D.C., on Tuesday, August 8, 2006 at 8:30 a. m.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 1650, 
+        "nw_score": 8
+    }, 
+    {
+        "doc2id": 2053, 
+        "doc2": "All meeting participants expressed concern about the outlook for inflation.", 
+        "doc1": "Manufacturing activity picked up in March after a lull in February.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 1386, 
+        "nw_score": -8
+    }, 
+    {
+        "doc2id": 488, 
+        "doc2": "Spreads on investment-grade corporate bonds were little changed over the intermeeting period, but spreads on speculative-grade bonds contracted notably.", 
+        "doc1": "Measures of inflation expectations were little changed over the intermeeting period.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 90, 
+        "nw_score": -4
+    }, 
+    {
+        "doc2id": 3578, 
+        "doc2": "Retailers reported weaker results in many regions of the country, but in some, retailers saw solid growth.", 
+        "doc1": "Return to text The_Manager of the System_Open_Market_Account reported on recent developments in foreign exchange markets.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 2446, 
+        "nw_score": -8
+    }, 
+    {
+        "doc2id": 4643, 
+        "doc2": "Wage and price pressures were generally still modest.", 
+        "doc1": "The_Manager of the System_Open_Market_Account reported on recent developments in foreign exchange markets.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 4412, 
+        "nw_score": -8
+    }, 
+    {
+        "doc2id": 2153, 
+        "doc2": "Broad equity indexes showed solid gains.", 
+        "doc1": "Inventory stocks appeared to be well aligned with demand in most industries.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 1254, 
+        "nw_score": -8
+    }, 
+    {
+        "doc2id": 306, 
+        "doc2": "More generally, members recognized that the Committees statement would need to evolve over time.", 
         "doc1": "By unanimous vote, the Committee ratified these transactions.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 1209, 
-        "nw_score": 5
+        "doc1id": 52, 
+        "nw_score": -8
     }, 
     {
-        "doc2id": 1411, 
-        "doc2": "Within that aggregate limit, draws of up to $10 billion were authorized, and the arrangement itself was authorized for a period of up to 180 days, unless extended by the FOMC.", 
-        "doc1": "The_Committee authorized associated draws of up to the full amount of $4 billion, and the arrangement itself was authorized for a period of up to 180 days unless extended by the FOMC.", 
+        "doc2id": 2095, 
+        "doc2": "Industrial production( IP) declined in September but rose slightly in October.", 
+        "doc1": "By unanimous vote, the Committee ratified these transactions.", 
         "question": "Are these sentences redundant?", 
-        "doc1id": 1212, 
-        "nw_score": 12
+        "doc1id": 1786, 
+        "nw_score": -5
+    }, 
+    {
+        "doc2id": 3364, 
+        "doc2": "Indeed, several participants noted some relapse in financial conditions late in the intermeeting period.", 
+        "doc1": "Core_PCE prices rose 0.1 percent in April and were estimated to have posted a similar, modest increase in May.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 2791, 
+        "nw_score": -7
+    }, 
+    {
+        "doc2id": 3149, 
+        "doc2": "Pressures eased a bit in mid-September, but short-term financial markets remained strained.", 
+        "doc1": "They dropped, on average, but otherwise were consistent with the indicators reported for July.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 3104, 
+        "nw_score": -8
+    }, 
+    {
+        "doc2id": 4022, 
+        "doc2": "In particular, manufacturers continued to reduce their stocks, though at a slower pace than last year.", 
+        "doc1": "Shipments of nondefense capital goods excluding aircraft were strong, especially outside the high-tech industries.", 
+        "question": "Are these sentences redundant?", 
+        "doc1id": 4017, 
+        "nw_score": -8
     }
 ]

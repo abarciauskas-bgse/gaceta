@@ -43,7 +43,7 @@ def print_clusters(cur, super_nodes, cluster_freqs_normalized, num_terms, terms)
         # workaround for reversing the array
         sorted_frequency_idcs = np.argsort(curr_cluster)[::-1]
         rel_frequencies = [curr_cluster[sorted_frequency_idcs[i]] for i in range(num_terms)]
-        top_terms = [terms[sorted_frequency_idcs[i]] for i in range(num_terms)]
+        top_terms = [terms[sorted_frequency_idcs[i]].decode('utf-8') for i in range(num_terms)]
         print tabulate(zip(top_terms, rel_frequencies), headers=['Top Terms', 'Relative Frequency'], tablefmt="pipe")
         print "\n\n"
 

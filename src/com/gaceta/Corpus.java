@@ -20,7 +20,7 @@ public class Corpus {
     private static final String FREELINGDIR = "/usr/local";
     private static final String DATA = FREELINGDIR + "/share/freeling/";
     private static final String LANG = "ca";
-    private static final boolean use_porter = false;//true;
+    private static final boolean use_porter = true;
 
     public Corpus (File[] filenames)
     {
